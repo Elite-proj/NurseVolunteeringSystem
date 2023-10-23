@@ -12,6 +12,7 @@ namespace NurseVolunteeringSystem.Models
 
         [Required(ErrorMessage ="Please enter city name")]
         public string CityName { get; set; }
+        public string Status { get; set; }
 
     }
 }

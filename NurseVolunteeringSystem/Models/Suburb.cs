@@ -11,6 +11,7 @@ namespace NurseVolunteeringSystem.Models
         public int SuburbID { get; set; }
         [Required(ErrorMessage ="Please enter suburb name")]
         public string SuburbName { get; set; }
+        public string Status { get; set; }
         [Required(ErrorMessage ="Please select city.")]
         public int CityID { get; set; }
         public City City { get; set; }

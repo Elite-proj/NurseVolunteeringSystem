@@ -11,5 +11,6 @@ namespace NurseVolunteeringSystem.Models
         public int ChronicConditionID { get; set; }
         [Required(ErrorMessage ="Please enter condition name")]
         public string ConditionName { get; set; }
+        public string Status { get; set; }
     }
 }
