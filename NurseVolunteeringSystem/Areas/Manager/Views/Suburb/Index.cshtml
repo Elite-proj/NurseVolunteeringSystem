@@ -1,0 +1,52 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.Suburb>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center" style="background-color:rgb(255,215,0,0.5)">List of Suburbs</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Assign New Suburb</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SuburbName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City.CityName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Suburb item in ViewBag.Suburbs)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.SuburbName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.CityName)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.SuburbID">Edit</a> |
+                    <a asp-action="Details" class="btn btn-light" asp-route-id="@item.SuburbID">Details</a> |
+
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.SuburbID">Delete</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

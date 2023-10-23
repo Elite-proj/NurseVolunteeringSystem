@@ -1,0 +1,63 @@
+﻿@model NurseVolunteeringSystem.Models.Suburb
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h3 class="text-center" style="background-color:rgb(255,215,0,0.5)">Edit Suburb</h3>
+<hr />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SuburbID" />
+            <div class="form-group">
+                <label asp-for="SuburbName" class="control-label text-dark"></label>
+                <input asp-for="SuburbName" class="form-control" />
+                <span asp-validation-for="SuburbName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostalCode" class="control-label text-dark"></label>
+                <input asp-for="PostalCode" class="form-control" />
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="City.CityName" class="control-label text-dark"></label>
+
+                <select asp-for="City.CityName" class="form-control">
+                    @foreach (City item in ViewBag.Cities)
+                    {
+                        if (item.CityName == Model.City.CityName)
+                        {
+                            <option value="@item.CityName" selected>@item.CityName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.CityName">@item.CityName</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="City.CityName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label text-dark"></label>
+                <input type="hidden" asp-for="Status" value="Active" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
