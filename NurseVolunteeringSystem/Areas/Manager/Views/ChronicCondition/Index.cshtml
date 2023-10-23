@@ -1,0 +1,55 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.ChronicCondition>
+
+@{
+    ViewData["Title"] = "Index";
+   
+}
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">List Of Chronic Conditions</h5>
+    </div>
+</div>
+<hr />
+<br />
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ConditionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConditionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+               
+                <td>
+                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.ChronicConditionID">Edit</a> |
+                        <a asp-action="Details" class="btn btn-light" asp-route-id="@item.ChronicConditionID">Details</a> |
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.ChronicConditionID">Delete</a>
+                </td>
+                
+
+            </tr>
+        }
+    </tbody>
+</table>
