@@ -13,4 +13,16 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Manager\Controllers\" />
+    <Folder Include="Areas\Manager\Models\" />
+    <Folder Include="Areas\Manager\Views\" />
+    <Folder Include="Areas\Nurse\Controllers\" />
+    <Folder Include="Areas\Nurse\Models\" />
+    <Folder Include="Areas\Nurse\Views\" />
+    <Folder Include="Areas\Patient\Controllers\" />
+    <Folder Include="Areas\Patient\Models\" />
+    <Folder Include="Areas\Patient\Views\" />
+  </ItemGroup>
+
 </Project>

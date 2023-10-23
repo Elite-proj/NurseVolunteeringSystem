@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +24,14 @@ namespace NurseVolunteeringSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddSession();
+
             services.AddControllersWithViews();
+
+            services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connString")));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,8 +54,25 @@ namespace NurseVolunteeringSystem
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapAreaControllerRoute(
+                    name: "patient",
+                    areaName: "Patient",
+                    pattern: "Patient/{controller=Home}/{action=index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                   name: "nurse",
+                   areaName: "Nurse",
+                   pattern: "Nurse/{controller=Home}/{action=index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                   name: "manager",
+                   areaName: "Manager",
+                   pattern: "Manager/{controller=Home}/{action=index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
