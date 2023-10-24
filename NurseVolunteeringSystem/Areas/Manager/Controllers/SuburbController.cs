@@ -13,41 +13,58 @@ namespace NurseVolunteeringSystem.Controllers
         {
             _context = context;
         }
-        [Area("Manager")]
 
+        [Area("Manager")]
         public IActionResult Index()
         {
-            var suburbs = _context.Suburb.Where(s => s.Status == "Active").Include(s => s.City).ToList(); 
+            var suburbs = _context.Suburb
+                .Where(s => s.Status == "Active")
+                .Include(s => s.City)
+                .ToList();
+
             ViewBag.Suburbs = suburbs;
             return View(suburbs);
         }
+
         [Area("Manager")]
         public IActionResult Create()
         {
             ViewBag.Cities = _context.City.ToList();
             return View();
         }
+
         [Area("Manager")]
         [HttpPost]
         public IActionResult Create(Suburb model)
         {
             if (ModelState.IsValid)
             {
+                var existingCity = _context.City.FirstOrDefault(c => c.CityName == model.City.CityName);
+
+                if (existingCity != null)
+                {
+                    model.City = existingCity; 
+                }
+
                 _context.Suburb.Add(model);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.Cities = _context.City.ToList();
             return View(model);
         }
+
         [Area("Manager")]
         public IActionResult Edit(int id)
         {
             var suburb = _context.Suburb.Include(s => s.City).FirstOrDefault(s => s.SuburbID == id);
+
             if (suburb == null)
             {
                 return NotFound();
             }
+
             ViewBag.Cities = _context.City.ToList();
             return View(suburb);
         }
@@ -58,10 +75,18 @@ namespace NurseVolunteeringSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var existingCity = _context.City.FirstOrDefault(c => c.CityName == model.City.CityName);
+
+                if (existingCity != null)
+                {
+                    model.City = existingCity; 
+                }
+
                 _context.Suburb.Update(model);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.Cities = _context.City.ToList();
             return View(model);
         }
