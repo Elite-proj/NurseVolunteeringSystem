@@ -23,6 +23,12 @@ namespace NurseVolunteeringSystem.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult HomePage()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
