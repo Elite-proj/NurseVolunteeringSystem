@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace NurseVolunteeringSystem.Areas.Manager.Controllers
 {
+    [Area("Manager")]
     public class HomeController : Controller
     {
-        [Area("Manager")]
+       
         public IActionResult Index()
         {
             return View();
@@ -19,5 +20,6 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         {
             return View();
         }
+
     }
 }
