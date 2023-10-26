@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using NurseVolunteeringSystem.DataAccess;
@@ -97,6 +98,8 @@ namespace NurseVolunteeringSystem.Controllers
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "N")
                     {
+                        HttpContext.Session.SetInt32("NurseID", Convert.ToInt32(dt.Rows[0]["UserID"].ToString()));
+
                        return RedirectToAction("HomePage", "Home", new { area = "Nurse" });
 
                     }

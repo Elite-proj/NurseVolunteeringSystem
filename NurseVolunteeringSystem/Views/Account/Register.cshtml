@@ -58,11 +58,13 @@
             <div class="input-group">
                 <div class="col-6 form-group">
                     <label class="control-label">City</label>
-                    <select id="CityList" class="form-control" asp-items="ViewBag.Cities" ></select>
+                    <select id="CityList" class="form-control" asp-items="ViewBag.Cities"></select>
+                    
                 </div>
                 <div class="col-6 form-group">
                     <label asp-for="SuburbID" class="control-label"></label>
                     <select id="SuburbList" asp-for="SuburbID" class="form-control" asp-items="@(new SelectList(string.Empty,"Value","Text"))"></select>
+                    <span asp-validation-for="SuburbID" class="text-danger"></span>
                 </div>
             </div>
             

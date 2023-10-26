@@ -1,0 +1,59 @@
+﻿@model NurseVolunteeringSystem.Models.PrefferedSuburb
+
+@{
+    ViewData["Title"] = "AddPreferredSuburb";
+}
+
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+
+<h1>AddPreferredSuburb</h1>
+
+<h4>PrefferedSuburb</h4>
+<hr />
+<div>
+    <div>
+        <form asp-controller="PreferredSuburb" asp-action="AddPreferredSuburb" asp-area="Nurse" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">City</label>
+                <select id="CityList" class="form-control" asp-items="ViewBag.Cities">
+                </select>
+                <span asp-validation-for="@Model.Suburb.CityID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SuburbID" class="control-label"></label>
+                <select id="SuburbList" asp-for="SuburbID" class="form-control" asp-items="@(new SelectList(string.Empty,"Value","Text"))"></select>
+                <span asp-validation-for="SuburbID" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="PreferredSuburb" asp-action="ListPreferredSuburbs" asp-area="Nurse">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CityList").change(function () {
+            $.getJSON("/Account/GetSuburbs", { id: $("#CityList").val() }, function (d) {
+                var row = "";
+                $("#SuburbList").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#SuburbList").html(row);
+            })
+        })
+    })
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

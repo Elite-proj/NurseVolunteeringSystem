@@ -1,0 +1,48 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.PrefferedSuburb>
+
+@{
+    ViewData["Title"] = "ListPreferredSuburbs";
+}
+
+<h1>ListPreferredSuburbs</h1>
+
+<p>
+    <a asp-controller="PreferredSuburb" asp-action="AddPreferredSuburb"  asp-area="Nurse">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Suburb.SuburbName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suburb.PostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suburb.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suburb.SuburbName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suburb.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suburb.City.CityName)
+            </td>
+           
+            <td>
+                <a asp-controller="PreferredSuburb" asp-action="UpdatePreferredSuburb" asp-area="Nurse" asp-route-id="@item.PrefferedSuburbID">Edit</a> |
+                
+                <a asp-controller="PreferredSuburb" asp-action="ConfirmPreferredSuburb" asp-area="Nurse" asp-route-id="@item.PrefferedSuburbID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
