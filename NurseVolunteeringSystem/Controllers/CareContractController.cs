@@ -36,7 +36,7 @@ namespace NurseVolunteeringSystem.Controllers
             if (ModelState.IsValid)
             {
                 careContract.ContractDate = DateTime.Today;
-                _context.Add(careContract);
+                _context.CareContract.Add(careContract);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
