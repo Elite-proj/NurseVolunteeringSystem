@@ -1,0 +1,47 @@
+﻿@model NurseVolunteeringSystem.Models.CareContract
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3 class="text-center" style="background-color:rgb(255,215,0,0.5)">Delete Care Contract</h3>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="ContractDate"></label>
+            <input asp-for="ContractDate" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AddressLine1"></label>
+            <input asp-for="AddressLine1" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AddressLine2"></label>
+            <input asp-for="AddressLine2" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="WoundDescription"></label>
+            <input asp-for="WoundDescription" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Suburb.SuburbName" class="control-label text-dark"></label>
+            <input asp-for="Suburb.SuburbName" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <a asp-action="DeleteConfirmed" asp-route-id="@Model.CareContractID" class="btn btn-danger">Delete</a>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </div>
+
+    </div>
+</div>
+
+

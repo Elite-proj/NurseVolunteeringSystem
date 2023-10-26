@@ -1,0 +1,60 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.CareContract>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center" style="background-color:rgb(255,215,0,0.5)">List of Care Contracts</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Contract Date
+            </th>
+            <th>
+                Address Line 1
+            </th>
+            <th>
+                Address Line 2
+            </th>
+            <th>
+                Wound Description
+            </th>
+            <th>
+                Suburb Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressLine1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressLine2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WoundDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.SuburbName)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.CareContractID">Edit</a> |
+                    <a asp-action="Details" class="btn btn-light" asp-route-id="@item.CareContractID">Details</a> |
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.CareContractID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

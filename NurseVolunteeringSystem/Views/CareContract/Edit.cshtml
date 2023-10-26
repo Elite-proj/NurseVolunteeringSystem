@@ -1,0 +1,55 @@
+﻿@model NurseVolunteeringSystem.Models.CareContract
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h3 class="text-center" style="background-color:rgb(255,215,0,0.5)">Edit Care Contract</h3>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="CareContractID" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="ContractDate"></label>
+                <input type="hidden" asp-for="ContractDate" class="form-control datepicker" />
+                <span asp-validation-for="ContractDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AddressLine1"></label>
+                <input asp-for="AddressLine1" class="form-control" />
+                <span asp-validation-for="AddressLine1" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AddressLine2"></label>
+                <input asp-for="AddressLine2" class="form-control" />
+                <span asp-validation-for="AddressLine2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WoundDescription"></label>
+                <input asp-for="WoundDescription" class="form-control" />
+                <span asp-validation-for="WoundDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Suburb.SuburbName" class="control-label text-dark"></label>
+                <select asp-for="Suburb.SuburbName" asp-items="@(new SelectList(ViewBag.Suburbs, "SuburbName", "SuburbName"))" class="form-control">
+                    <option value="" disabled>Select Suburb</option>
+                </select>
+                <span asp-validation-for="Suburb.SuburbName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+            </div>
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+</div>
+
+

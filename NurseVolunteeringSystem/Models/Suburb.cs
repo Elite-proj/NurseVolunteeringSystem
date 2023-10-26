@@ -13,7 +13,7 @@ namespace NurseVolunteeringSystem.Models
         [Required(ErrorMessage ="Please enter suburb name")]
         public string SuburbName { get; set; }
         [Required(ErrorMessage ="Please enter postal code")]
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
         public string Status { get; set; }
         [Required(ErrorMessage ="Please select city.")]
         public int CityID { get; set; }
