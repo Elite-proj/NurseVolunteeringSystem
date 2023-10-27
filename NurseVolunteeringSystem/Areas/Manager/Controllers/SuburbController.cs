@@ -14,7 +14,7 @@ namespace NurseVolunteeringSystem.Controllers
             _context = context;
         }
 
-        
+        [Area("Manager")]
         public IActionResult Index()
         {
             var suburbs = _context.Suburb
@@ -26,14 +26,14 @@ namespace NurseVolunteeringSystem.Controllers
             return View(suburbs);
         }
 
-        
+        [Area("Manager")]
         public IActionResult Create()
         {
             ViewBag.Cities = _context.City.ToList();
             return View();
         }
+        [Area("Manager")]
 
-        
         [HttpPost]
         public IActionResult Create(Suburb model)
         {
@@ -55,7 +55,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(model);
         }
 
-        
+        [Area("Manager")]
         public IActionResult Edit(int id)
         {
             var suburb = _context.Suburb.Include(s => s.City).FirstOrDefault(s => s.SuburbID == id);
@@ -69,7 +69,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(suburb);
         }
 
-       
+        [Area("Manager")]
         [HttpPost]
         public IActionResult Edit(Suburb model)
         {
@@ -91,7 +91,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(model);
         }
 
-        
+        [Area("Manager")]
         public IActionResult Details(int id)
         {
             var suburb = _context.Suburb.Include(s => s.City).FirstOrDefault(s => s.SuburbID == id);
@@ -102,8 +102,8 @@ namespace NurseVolunteeringSystem.Controllers
             return View(suburb);
         }
 
-        
 
+        [Area("Manager")]
         public IActionResult Delete(int id)
         {
             var suburb = _context.Suburb.Include(s => s.City).FirstOrDefault(s => s.SuburbID == id);
@@ -113,7 +113,7 @@ namespace NurseVolunteeringSystem.Controllers
             }
             return View(suburb);
         }
-        
+        [Area("Manager")]
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {

@@ -15,20 +15,20 @@ namespace NurseVolunteeringSystem.Controllers
         {
             _context = context;
         }
-
+        [Area("Patient")]
         public async Task<IActionResult> Index()
         {
             var careContracts = await _context.CareContract.Include(c => c.Suburb).ToListAsync();
             return View(careContracts);
         }
 
-
+        [Area("Patient")]
         public IActionResult Create()
         {
             ViewBag.Suburbs = _context.Suburb.ToList();
             return View();
         }
-
+        [Area("Patient")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CareContract careContract)
@@ -54,7 +54,7 @@ namespace NurseVolunteeringSystem.Controllers
        
         }
 
-        // GET: CareContract/Edit/5
+        [Area("Patient")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,7 +72,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(careContract);
         }
 
-        // POST: CareContract/Edit/5
+        [Area("Patient")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CareContract careContract)
@@ -106,7 +106,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(careContract);
         }
 
-        // GET: CareContract/Delete/5
+        [Area("Patient")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,7 +126,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(careContract);
         }
 
-        // POST: CareContract/Delete/5
+        [Area("Patient")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

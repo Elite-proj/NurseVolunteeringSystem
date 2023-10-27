@@ -15,22 +15,22 @@ public class ChronicConditionController : Controller
         _context = context;
     }
 
-    
-  
+
+    [Area("Manager")]
     public IActionResult Index()
     {
         var chronicConditions = _context.ChronicCondition.Where(c => c.Status == "Active").ToList();
         return View(chronicConditions);
     }
 
-   
+    [Area("Manager")]
 
     public IActionResult Create()
     {
         return View();
     }
 
-    
+    [Area("Manager")]
 
     [HttpPost]
     public IActionResult Create(ChronicCondition model)
@@ -43,7 +43,7 @@ public class ChronicConditionController : Controller
         }
         return View(model);
     }
-
+    [Area("Manager")]
 
     public IActionResult Edit(int id)
     {
@@ -55,7 +55,7 @@ public class ChronicConditionController : Controller
         return View(condition);
     }
 
-    
+    [Area("Manager")]
 
     [HttpPost]
     public IActionResult Edit(ChronicCondition model)
@@ -68,7 +68,7 @@ public class ChronicConditionController : Controller
         }
         return View(model);
     }
-
+    [Area("Manager")]
 
     public IActionResult Details(int id)
     {
@@ -80,7 +80,7 @@ public class ChronicConditionController : Controller
         return View(condition);
     }
 
-    
+    [Area("Manager")]
     public IActionResult Delete(int id)
     {
         var condition = _context.ChronicCondition.Find(id);
@@ -91,7 +91,7 @@ public class ChronicConditionController : Controller
         return View(condition);
     }
 
-    
+    [Area("Manager")]
 
     [HttpPost, ActionName("Delete")]
     public IActionResult DeleteConfirmed(int id)
