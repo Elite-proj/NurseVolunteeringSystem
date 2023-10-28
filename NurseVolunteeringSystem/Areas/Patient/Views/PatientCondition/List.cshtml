@@ -15,7 +15,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.ChronicCondition)
             </th>
-           
+            <th>
+                @Html.DisplayNameFor(model => model.ChronicCondition.Description)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -25,7 +28,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ChronicCondition.ConditionName)
             </td>
-            
+            <td>
+                @Html.DisplayFor(modelItem => item.ChronicCondition.Description)
+            </td>
+
             <td>
                 <a asp-action="ConfirmDelete" asp-controller="PatientCondition" asp-area="Patient" asp-route-id="@item.PatientChronicConditionID">Delete</a>
             </td>
