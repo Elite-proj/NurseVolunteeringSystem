@@ -105,7 +105,8 @@ namespace NurseVolunteeringSystem.Controllers
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "P")
                     {
-                       return RedirectToAction("HomePage", "Home", new { area = "Patient" });
+                        HttpContext.Session.SetInt32("PatientID", Convert.ToInt32(dt.Rows[0]["UserID"].ToString()));
+                        return RedirectToAction("HomePage", "Home", new { area = "Patient" });
                     }
                     else
                     {

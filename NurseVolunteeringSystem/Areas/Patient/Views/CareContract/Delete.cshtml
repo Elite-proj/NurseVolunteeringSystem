@@ -8,38 +8,50 @@
 
 <div class="row">
     <div class="col-md-4 offset-md-4">
+        <form asp-controller="CareContract" asp-area="Patient" asp-action="Delete" method="post">
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <div class="form-group">
-            <label asp-for="ContractDate"></label>
-            <input asp-for="ContractDate" class="form-control" readonly />
-        </div>
+            <div class="form-group">
+                <label asp-for="ContractDate"></label>
+                <input asp-for="ContractDate" class="form-control" readonly />
+            </div>
 
-        <div class="form-group">
-            <label asp-for="AddressLine1"></label>
-            <input asp-for="AddressLine1" class="form-control" readonly />
-        </div>
+            <div class="form-group">
+                <label asp-for="AddressLine1"></label>
+                <input asp-for="AddressLine1" class="form-control" readonly />
+            </div>
 
-        <div class="form-group">
-            <label asp-for="AddressLine2"></label>
-            <input asp-for="AddressLine2" class="form-control" readonly />
-        </div>
+            <div class="form-group">
+                <label asp-for="AddressLine2"></label>
+                <input asp-for="AddressLine2" class="form-control" readonly />
+            </div>
 
-        <div class="form-group">
-            <label asp-for="WoundDescription"></label>
-            <input asp-for="WoundDescription" class="form-control" readonly />
-        </div>
+            <div class="form-group">
+                <label asp-for="WoundDescription"></label>
+                <input asp-for="WoundDescription" class="form-control" readonly />
+            </div>
 
-        <div class="form-group">
-            <label asp-for="Suburb.SuburbName" class="control-label text-dark"></label>
-            <input asp-for="Suburb.SuburbName" class="form-control" readonly />
-        </div>
+            <div class="form-group">
+                <label asp-for="Suburb.SuburbName" class="control-label text-dark"></label>
+                <input asp-for="Suburb.SuburbName" class="form-control" readonly />
+            </div>
 
-        <div class="form-group">
-            <a asp-action="DeleteConfirmed" asp-route-id="@Model.CareContractID" class="btn btn-danger">Delete</a>
-            <a asp-action="Index" class="btn btn-secondary">Back</a>
-        </div>
+            <input asp-for="CareContractID" hidden class="form-control" />
+            <input asp-for="ContractDate" hidden class="form-control" />
+            <input asp-for="StartCareDate" hidden class="form-control" />
+            <input asp-for="EndCareDate" hidden class="form-control" />
+            <input asp-for="ContractStatus" hidden class="form-control" />
+            <input asp-for="DeleteStatus" hidden class="form-control" />
+            <input asp-for="PatientID" hidden class="form-control" />
+            <input asp-for="NurseID" hidden class="form-control" />
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger">delete</button>
+               
+                <a asp-controller="CareContract" asp-area="Patient" asp-action="Index" class="btn btn-secondary">Back</a>
+            </div>
+        </form>
+        
 
     </div>
 </div>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.PatientChronicCondition>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ChronicCondition)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChronicCondition.ConditionName)
+            </td>
+            
+            <td>
+                <a asp-action="ConfirmDelete" asp-controller="PatientCondition" asp-area="Patient" asp-route-id="@item.PatientChronicConditionID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

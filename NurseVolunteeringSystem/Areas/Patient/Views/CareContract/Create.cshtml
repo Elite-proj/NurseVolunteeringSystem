@@ -1,4 +1,4 @@
-﻿@model NurseVolunteeringSystem.Models.CareContract
+﻿@model NurseVolunteeringSystem.Areas.Patient.Models.AddCareContractVM
 
 @{
     ViewData["Title"] = "Create";
@@ -10,12 +10,6 @@
     <div class="col-md-4 offset-md-4">
         <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
-                <label asp-for="ContractDate"></label>
-                <input type="hidden" asp-for="ContractDate" class="form-control datepicker" />
-                <span asp-validation-for="ContractDate" class="text-danger"></span>
-            </div>
 
             <div class="form-group">
                 <label asp-for="AddressLine1"></label>

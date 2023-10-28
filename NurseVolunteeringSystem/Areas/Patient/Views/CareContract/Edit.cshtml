@@ -1,4 +1,4 @@
-﻿@model NurseVolunteeringSystem.Models.CareContract
+﻿@model NurseVolunteeringSystem.Areas.Patient.Models.AddCareContractVM
 
 @{
     ViewData["Title"] = "Edit";
@@ -9,14 +9,8 @@
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <form asp-action="Edit">
-            <input type="hidden" asp-for="CareContractID" />
+            <input type="hidden" asp-for="ContractID" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
-                <label asp-for="ContractDate"></label>
-                <input type="hidden" asp-for="ContractDate" class="form-control datepicker" />
-                <span asp-validation-for="ContractDate" class="text-danger"></span>
-            </div>
 
             <div class="form-group">
                 <label asp-for="AddressLine1"></label>
@@ -37,12 +31,20 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Suburb.SuburbName" class="control-label text-dark"></label>
-                <select asp-for="Suburb.SuburbName" asp-items="@(new SelectList(ViewBag.Suburbs, "SuburbName", "SuburbName"))" class="form-control">
+                <label class="control-label text-dark">Suburb Name</label>
+                <select asp-for="SuburbID" asp-items="@(new SelectList(ViewBag.Suburbs, "SuburbID", "SuburbName"))" class="form-control">
                     <option value="" disabled>Select Suburb</option>
                 </select>
-                <span asp-validation-for="Suburb.SuburbName" class="text-danger"></span>
+                <span asp-validation-for="SuburbID" class="text-danger"></span>
             </div>
+            <input asp-for="ContractID" hidden class="form-control" />
+            <input asp-for="ContractDate" hidden class="form-control" />
+            <input asp-for="StartCareDate" hidden class="form-control" />
+            <input asp-for="EndCareDate" hidden class="form-control" />
+            <input asp-for="ContractStatus" hidden class="form-control" />
+            <input asp-for="DeleteStatus" hidden class="form-control" />
+            <input asp-for="PatientID" hidden class="form-control" />
+            <input asp-for="NurseID" hidden class="form-control" />
 
             <div class="form-group">
                 <input type="submit" value="Save Changes" class="btn btn-primary" />

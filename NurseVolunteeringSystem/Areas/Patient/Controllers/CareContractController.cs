@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NurseVolunteeringSystem.Areas.Patient.Models;
 using NurseVolunteeringSystem.Models;
 using System;
 using System.Linq;
@@ -7,36 +9,50 @@ using System.Threading.Tasks;
 
 namespace NurseVolunteeringSystem.Controllers
 {
+    [Area("Patient")]
     public class CareContractController : Controller
     {
         private readonly AppDBContext _context;
-
+        
         public CareContractController(AppDBContext context)
         {
             _context = context;
         }
-        [Area("Patient")]
+        
         public async Task<IActionResult> Index()
         {
-            var careContracts = await _context.CareContract.Include(c => c.Suburb).ToListAsync();
+            int PatientID = int.Parse(HttpContext.Session.GetInt32("PatientID").ToString());
+            var careContracts = await _context.CareContract.Where(c=> c.DeleteStatus=="Active" && c.PatientID==PatientID).Include(s => s.Suburb).OrderBy(o=>o.CareContractID).ToListAsync();
             return View(careContracts);
         }
 
-        [Area("Patient")]
+        
         public IActionResult Create()
         {
             ViewBag.Suburbs = _context.Suburb.ToList();
             return View();
         }
-        [Area("Patient")]
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CareContract careContract)
+        public async Task<IActionResult> Create(AddCareContractVM contractVM)
         {
+
             if (ModelState.IsValid)
             {
+                CareContract careContract = new CareContract();
+
+                careContract.AddressLine1 = contractVM.AddressLine1;
+                careContract.AddressLine2 = contractVM.AddressLine2;
+                careContract.SuburbID = contractVM.SuburbID;
+                careContract.WoundDescription = contractVM.WoundDescription;
+
                 careContract.ContractDate = DateTime.Today;
+                careContract.DeleteStatus = "Active";
+                careContract.ContractStatus = "N";
+                careContract.PatientID = int.Parse(HttpContext.Session.GetInt32("PatientID").ToString());
                 _context.CareContract.Add(careContract);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -50,11 +66,11 @@ namespace NurseVolunteeringSystem.Controllers
             }
 
             ViewBag.Suburbs = _context.Suburb.ToList();
-            return View(careContract);
+            return View(contractVM);
        
         }
 
-        [Area("Patient")]
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -63,21 +79,40 @@ namespace NurseVolunteeringSystem.Controllers
             }
 
             var careContract = await _context.CareContract.FindAsync(id);
+
+            AddCareContractVM contractVM = new AddCareContractVM();
+
+            contractVM.ContractID = careContract.CareContractID;
+            contractVM.AddressLine1 = careContract.AddressLine1;
+            contractVM.AddressLine2 = careContract.AddressLine2;
+            contractVM.SuburbID = careContract.SuburbID;
+            contractVM.WoundDescription = careContract.WoundDescription;
+
+            contractVM.ContractDate = careContract.ContractDate;
+            contractVM.StartCareDate = careContract.StartCareDate;
+            contractVM.EndCareDate = careContract.EndCareDate;
+            contractVM.ContractStatus = careContract.ContractStatus;
+            contractVM.DeleteStatus = careContract.DeleteStatus;
+            contractVM.PatientID = careContract.PatientID;
+            contractVM.NurseID = careContract.NurseID;
+
             if (careContract == null)
             {
                 return NotFound();
             }
 
             ViewBag.Suburbs = _context.Suburb.ToList();
-            return View(careContract);
+            return View(contractVM);
         }
 
-        [Area("Patient")]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, CareContract careContract)
+        public async Task<IActionResult> Edit(int id, AddCareContractVM contractVM)
         {
-            if (id != careContract.CareContractID)
+            
+
+            if (id != contractVM.ContractID)
             {
                 return NotFound();
             }
@@ -86,12 +121,27 @@ namespace NurseVolunteeringSystem.Controllers
             {
                 try
                 {
-                    _context.Update(careContract);
+                    CareContract careContract = new CareContract();
+                    careContract.CareContractID = contractVM.ContractID;
+                    careContract.AddressLine1 = contractVM.AddressLine1;
+                    careContract.AddressLine2 = contractVM.AddressLine2;
+                    careContract.SuburbID = contractVM.SuburbID;
+                    careContract.WoundDescription = contractVM.WoundDescription;
+
+                    careContract.ContractDate = contractVM.ContractDate;
+                    careContract.StartCareDate = contractVM.StartCareDate;
+                    careContract.EndCareDate = contractVM.EndCareDate;
+                    careContract.ContractStatus = contractVM.ContractStatus;
+                    careContract.DeleteStatus = contractVM.DeleteStatus;
+                    careContract.PatientID = contractVM.PatientID;
+                    careContract.NurseID = contractVM.NurseID;
+
+                    _context.CareContract.Update(careContract);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CareContractExists(careContract.CareContractID))
+                    if (!CareContractExists(contractVM.ContractID))
                     {
                         return NotFound();
                     }
@@ -102,11 +152,17 @@ namespace NurseVolunteeringSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Suburbs = _context.Suburb.ToList();
-            return View(careContract);
+            else
+            {
+                ViewBag.Suburbs = _context.Suburb.ToList();
+                return View(contractVM);
+            }
+
+           
+            
         }
 
-        [Area("Patient")]
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,7 +182,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(careContract);
         }
 
-        [Area("Patient")]
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
