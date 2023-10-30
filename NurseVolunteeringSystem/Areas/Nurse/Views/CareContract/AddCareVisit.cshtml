@@ -1,0 +1,40 @@
+﻿@model NurseVolunteeringSystem.Models.CareVisit
+
+@{
+    ViewData["Title"] = "AddCareVisit";
+}
+
+<h1>AddCareVisit</h1>
+
+<h4>CareVisit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddCareVisit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" type="date" class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApproximateArriveTime" class="control-label"></label>
+                <input asp-for="ApproximateArriveTime" type="time" class="form-control" />
+                <span asp-validation-for="ApproximateArriveTime" class="text-danger"></span>
+            </div>
+            <input asp-for="CareContractID" class="form-control" hidden value="@ViewBag.ContractID" />
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListAssignedContracts">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

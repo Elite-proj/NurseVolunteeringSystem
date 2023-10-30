@@ -1,0 +1,65 @@
+﻿@model NurseVolunteeringSystem.Areas.Nurse.Models.EditCareVisitVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CareVisit</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CareVisitID" />
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" disabled class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApproximateArriveTime" class="control-label"></label>
+                <input asp-for="ApproximateArriveTime" disabled class="form-control" />
+                <span asp-validation-for="ApproximateArriveTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisistArriveTime" class="control-label"></label>
+                <input asp-for="VisistArriveTime" class="form-control" />
+                <span asp-validation-for="VisistArriveTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartTime" class="control-label"></label>
+                <input asp-for="DepartTime" class="form-control" />
+                <span asp-validation-for="DepartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WoundProgress" class="control-label"></label>
+                <input asp-for="WoundProgress" class="form-control" />
+                <span asp-validation-for="WoundProgress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+            <input asp-for="VisitDate" hidden class="form-control" />
+            <input asp-for="ApproximateArriveTime" hidden class="form-control" />
+            <input asp-for="Status" hidden class="form-control" />
+            <input asp-for="CareContractID" hidden class="form-control" />
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListAssignedContracts">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

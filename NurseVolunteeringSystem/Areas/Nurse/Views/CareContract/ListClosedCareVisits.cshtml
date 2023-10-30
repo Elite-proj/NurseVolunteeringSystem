@@ -1,0 +1,82 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.CareVisit>
+
+@{
+    ViewData["Title"] = "ListCareVisits";
+
+
+}
+
+<h1>ListCareVisits</h1>
+
+<p>
+    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListClosedContracts">Back</a>
+</p>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VisitDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApproximateArriveTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VisistArriveTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WoundProgress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @{
+                        string VisitDate = item.DepartTime.ToString("dd/MM/yyyy");
+                        string ApproximateArriveTime = item.ApproximateArriveTime.ToString("HH:mm");
+                        string VisistArriveTime = item.VisistArriveTime.ToString("HH:mm");
+                        string DepartTime = item.DepartTime.ToString("HH:mm");
+
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => VisitDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => ApproximateArriveTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => VisistArriveTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => DepartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WoundProgress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>
+
+
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4 class="bg-warning text-center text-white p-2">No care visits added.</h4>
+}

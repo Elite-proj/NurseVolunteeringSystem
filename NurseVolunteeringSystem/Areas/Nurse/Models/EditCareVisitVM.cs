@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace NurseVolunteeringSystem.Models
+namespace NurseVolunteeringSystem.Areas.Nurse.Models
 {
-    public class CareVisit
+    public class EditCareVisitVM
     {
         public int CareVisitID { get; set; }
-        [Required(ErrorMessage ="Please enter visit date")]
         public DateTime VisitDate { get; set; }
-        [Required(ErrorMessage = "Please enter approximate arrive time")]
         public DateTime ApproximateArriveTime { get; set; }
+        [Required(ErrorMessage = "Please enter arrive time")]
         public DateTime VisistArriveTime { get; set; }
         public DateTime DepartTime { get; set; }
         public string WoundProgress { get; set; }
@@ -20,6 +19,6 @@ namespace NurseVolunteeringSystem.Models
         public string Status { get; set; }
 
         public int CareContractID { get; set; }
-        public CareContract CareContract { get; set; }
+        
     }
 }
