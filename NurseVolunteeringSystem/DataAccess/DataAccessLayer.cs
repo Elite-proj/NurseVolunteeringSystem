@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NurseVolunteeringSystem.Models.ViewModels;
 using NurseVolunteeringSystem.Models;
+using NurseVolunteeringSystem.Areas.Manager.Models;
 using NurseVolunteeringSystem.Password;
 
 namespace NurseVolunteeringSystem.DataAccess
@@ -352,6 +353,35 @@ namespace NurseVolunteeringSystem.DataAccess
             dbconn.Close();
 
             return x;
+        }
+
+        public DataTable SearchVisitsByDates(DateRangeVM date)
+        {
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("spSeachVisitsByDate", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@MinDate", date.MinDate);
+            dbComm.Parameters.AddWithValue("@MaxDate", date.MaxDate);
+            dbComm.Parameters.AddWithValue("@ContractID", date.contractID);
+            
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dt = new DataTable();
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+            return dt;
         }
 
 

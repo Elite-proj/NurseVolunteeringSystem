@@ -43,10 +43,10 @@
             {
             <tr>
                 @{
-                    string VisitDate = item.DepartTime.ToString("dd/MM/yyyy");
+                    string VisitDate = item.VisitDate.ToString("dd/MM/yyyy");
                     string ApproximateArriveTime = item.ApproximateArriveTime.ToString("HH:mm");
-                    string VisistArriveTime = item.VisistArriveTime.ToString("HH:mm");
-                    string DepartTime = item.DepartTime.ToString("HH:mm");
+                    string VisistArriveTime = item.VisistArriveTime?.ToString("HH:mm");
+                    string DepartTime = item.DepartTime?.ToString("HH:mm");
 
                 }
                 <td>

@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<NurseVolunteeringSystem.Models.CareVisit>
 
 @{
-    ViewData["Title"] = "ListCareVisits";
-
-
+    ViewData["Title"] = "SearchResults";
 }
 
-<h1>ListCareVisits</h1>
+<h1>SearchResults</h1>
 
 <p>
-    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListClosedContracts">Back</a>
+    <a asp-controller="Contract" asp-area="Nurse" asp-action="ListAssignedContracts">back</a>
 </p>
 @if (Model != null)
 {

@@ -13,8 +13,8 @@ namespace NurseVolunteeringSystem.Models
         public DateTime VisitDate { get; set; }
         [Required(ErrorMessage = "Please enter approximate arrive time")]
         public DateTime ApproximateArriveTime { get; set; }
-        public DateTime VisistArriveTime { get; set; }
-        public DateTime DepartTime { get; set; }
+        public DateTime? VisistArriveTime { get; set; }
+        public DateTime? DepartTime { get; set; }
         public string WoundProgress { get; set; }
         public string Notes { get; set; }
         public string Status { get; set; }
