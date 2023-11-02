@@ -34,8 +34,7 @@ namespace NurseVolunteeringSystem.Models.ViewModels
         public string ContactNo { get; set; }
         [Required(ErrorMessage ="Please select gender")]
         public int GenderID { get; set; }
-        [Required(ErrorMessage = "Please enter IDNumber")]
-        public string IDNumber { get; set; }
+       
         public string UserType { get; set; }
 
         public string GenderName { get; set; }

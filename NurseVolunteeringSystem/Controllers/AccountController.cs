@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using NurseVolunteeringSystem.Password;
 
 namespace NurseVolunteeringSystem.Controllers
 {
@@ -48,6 +49,7 @@ namespace NurseVolunteeringSystem.Controllers
             return Json(Suburbs);
         }
 
+        
         [HttpPost]
         public IActionResult Register(PatientViewModel patient)
         {

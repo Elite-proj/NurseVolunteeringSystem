@@ -1,4 +1,4 @@
-﻿@model NurseVolunteeringSystem.Models.ViewModels.UpdateNurseVM;
+﻿@model NurseVolunteeringSystem.Models.ViewModels.UpdateNurseViewModel;
 
 @{
     ViewData["Title"] = "UpdateNurse";
@@ -10,10 +10,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="UpdateNurse">
+        <form asp-controller="Home" asp-action="UpdateNursePersonalInfo" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="UserID" />
+            <input type="hidden" asp-for="NurseID" />
 
+           
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -24,7 +25,7 @@
                 <input asp-for="Surname" class="form-control" />
                 <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
                 <label asp-for="GenderID" class="control-label"></label>
                 <select asp-for="GenderID" class="form-control" asp-items="ViewBag.Genders">

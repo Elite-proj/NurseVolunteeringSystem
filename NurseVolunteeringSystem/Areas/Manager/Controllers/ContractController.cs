@@ -38,6 +38,53 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         }
 
         [HttpGet]
+        public IActionResult ContractsByDate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ContractsByDate(DateRangeVM date)
+        {
+            if(ModelState.IsValid)
+            {
+                data = new DataAccessLayer(_IConfiguration);
+                dt = new DataTable();
+
+                dt = data.SearchContractsByDates(date);
+
+                List<CareContract> contracts = new List<CareContract>();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CareContract contract = new CareContract();
+
+                    contract.ContractDate = DateTime.Parse(dt.Rows[i]["ContractDate"].ToString());
+                    contract.CareContractID = int.Parse(dt.Rows[i]["CareContractID"].ToString());
+                    contract.AddressLine1 = dt.Rows[i]["AddressLine1"].ToString();
+                    contract.AddressLine2 = dt.Rows[i]["AddressLine2"].ToString();
+                    contract.Suburb.SuburbName = dt.Rows[i]["SuburbName"].ToString();
+                    contract.SuburbID = int.Parse(dt.Rows[i]["SuburbID"].ToString());
+                    contract.WoundDescription = dt.Rows[i]["WoundDescription"].ToString();
+                    contract.ContractStatus = dt.Rows[i]["ContractStatus"].ToString();
+                    contract.StartCareDate = DateTime.Parse(dt.Rows[i]["StartCareDate"].ToString());
+                    contract.EndCareDate = DateTime.Parse(dt.Rows[i]["EndCareDate"].ToString());
+                    contract.PatientID= int.Parse(dt.Rows[i]["CareContractID"].ToString());
+                    
+
+                    contracts.Add(contract);
+                }
+
+                return View("ContractSearchResults", contracts);
+
+            }
+            else
+            {
+                return View(date);
+            }
+        }
+
+        [HttpGet]
         public IActionResult ListAssignedContracts()
         {
             var contracts = context.CareContract.Where(c => c.ContractStatus == "A").Include(s => s.Suburb).OrderBy(o => o.CareContractID);
@@ -55,30 +102,40 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpPost]
         public IActionResult ContractVisits(DateRangeVM date)
         {
-            data = new DataAccessLayer(_IConfiguration);
-            dt = new DataTable();
-
-            dt = data.SearchVisitsByDates(date);
-
-            List<CareVisit> visits = new List<CareVisit>();
-
-            for(int i=0;i<dt.Rows.Count;i++)
+            if(ModelState.IsValid)
             {
-                CareVisit visit = new CareVisit();
+                data = new DataAccessLayer(_IConfiguration);
+                dt = new DataTable();
 
-                visit.ApproximateArriveTime = DateTime.Parse(dt.Rows[i]["ApproximateArriveTime"].ToString());
-                visit.CareContractID = int.Parse(dt.Rows[i]["CareContractID"].ToString());
-                visit.CareVisitID= int.Parse(dt.Rows[i]["CareVisitID"].ToString());
-                visit.DepartTime= DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
-                visit.Notes = dt.Rows[i]["Notes"].ToString();
-                visit.VisistArriveTime = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
-                visit.VisitDate= DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
-                visit.WoundProgress= dt.Rows[i]["WoundProgress"].ToString();
+                dt = data.SearchVisitsByDates(date);
 
-                visits.Add(visit);
+                List<CareVisit> visits = new List<CareVisit>();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CareVisit visit = new CareVisit();
+
+                    visit.ApproximateArriveTime = DateTime.Parse(dt.Rows[i]["ApproximateArriveTime"].ToString());
+                    visit.CareContractID = int.Parse(dt.Rows[i]["CareContractID"].ToString());
+                    visit.CareVisitID = int.Parse(dt.Rows[i]["CareVisitID"].ToString());
+                    visit.DepartTime = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
+                    visit.Notes = dt.Rows[i]["Notes"].ToString();
+                    visit.VisistArriveTime = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
+                    visit.VisitDate = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
+                    visit.WoundProgress = dt.Rows[i]["WoundProgress"].ToString();
+
+                    visits.Add(visit);
+                }
+
+                return View("SearchResults", visits);
             }
+            else
+            {
+                ViewBag.ContractID = date.contractID;
 
-            return View("SearchResults",visits);
+                return View(date);
+            }
+            
         }
 
         [HttpGet]

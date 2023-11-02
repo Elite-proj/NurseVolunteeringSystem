@@ -42,6 +42,7 @@ namespace NurseVolunteeringSystem.Models.ViewModels
         public string Status { get; set; }
         [Required(ErrorMessage = "Please select gender")]
         public int GenderID { get; set; }
+        [Required(ErrorMessage = "Please select date of birth")]
         public DateTime DateOfBirth { get; set; }
         [Required(ErrorMessage = "Please enter emergency contact person")]
         public string EmergencyContactPerson { get; set; }

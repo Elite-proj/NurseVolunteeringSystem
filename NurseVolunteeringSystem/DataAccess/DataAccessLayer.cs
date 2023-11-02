@@ -86,7 +86,7 @@ namespace NurseVolunteeringSystem.DataAccess
             dbComm.Parameters.AddWithValue("@Password", PasswordEncryption.ConvertToEncrypt(nurse.Password));
             dbComm.Parameters.AddWithValue("@ContactNo", nurse.ContactNo);
             dbComm.Parameters.AddWithValue("@GenderID", nurse.GenderID);
-            dbComm.Parameters.AddWithValue("@IDNumber", nurse.IDNumber);
+            
             dbComm.Parameters.AddWithValue("@UserType", nurse.UserType);
 
 
@@ -218,7 +218,7 @@ namespace NurseVolunteeringSystem.DataAccess
             dbComm.Parameters.AddWithValue("@Email", nurse.Email);
             dbComm.Parameters.AddWithValue("@ContactNo", nurse.ContactNo);
             dbComm.Parameters.AddWithValue("@GenderID", nurse.GenderID);
-            dbComm.Parameters.AddWithValue("@IDNumber", nurse.IDNumber);
+            
             dbComm.Parameters.AddWithValue("@UserID", nurse.UserID);
 
 
@@ -384,6 +384,198 @@ namespace NurseVolunteeringSystem.DataAccess
             return dt;
         }
 
+        public DataTable SearchContractsByDates(DateRangeVM date)
+        {
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_SearchCareContractByDates", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@MinDate", date.MinDate);
+            dbComm.Parameters.AddWithValue("@MaxDate", date.MaxDate);
+
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dt = new DataTable();
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+            return dt;
+        }
+
+
+        #endregion
+
+        #region Update personal info 
+        public int UpdateNursePersonalInfo(UpdateNurseViewModel nurse)
+        {
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_UpdateNursePersonalInfo", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+           
+
+           
+            dbComm.Parameters.AddWithValue("@FirstName", nurse.FirstName);
+            dbComm.Parameters.AddWithValue("@Surname", nurse.Surname);
+            dbComm.Parameters.AddWithValue("@EmailAddress", nurse.Email);
+            dbComm.Parameters.AddWithValue("@ContactNo", nurse.ContactNo);
+            dbComm.Parameters.AddWithValue("@GenderID", nurse.GenderID);
+            dbComm.Parameters.AddWithValue("@NurseID", nurse.NurseID);
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+        public int UpdatePatientPersonalInfo(UpdatePatientViewModel patient)
+        {
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_PatientUpdatePersonalInfo", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+           
+
+           
+            dbComm.Parameters.AddWithValue("@FirstName", patient.FirstName);
+            dbComm.Parameters.AddWithValue("@Surname", patient.Surname);
+            dbComm.Parameters.AddWithValue("@EmailAddress", patient.Email);
+            dbComm.Parameters.AddWithValue("@AddressLine1", patient.AddressLine1);
+            dbComm.Parameters.AddWithValue("@AddressLine2", patient.AddressLine2);
+            dbComm.Parameters.AddWithValue("@SuburbID", patient.SuburbID);
+            dbComm.Parameters.AddWithValue("@ContactNo", patient.ContactNo);
+            dbComm.Parameters.AddWithValue("@GenderID", patient.GenderID);
+            dbComm.Parameters.AddWithValue("@DateOfBirth", patient.DateOfBirth.ToString());
+            dbComm.Parameters.AddWithValue("@EmergencyContactPerson", patient.EmergencyContactPerson);
+            dbComm.Parameters.AddWithValue("@EmergencyContactNo", patient.EmergencyContactNumber);
+            dbComm.Parameters.AddWithValue("@IDNumber", patient.IDNumber);
+            dbComm.Parameters.AddWithValue("@PatientID", patient.PatientID);
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+        public DataTable GetPatientByID(int id)
+        {
+
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_SelectPatientByID", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@UserID", id);
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dt = new DataTable();
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+            return dt;
+
+
+        }
+        public int UpdateUserPassword(UpdateUserPassword user)
+        {
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_ChangeUserPassword", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+
+
+
+            
+            dbComm.Parameters.AddWithValue("@Password", PasswordEncryption.ConvertToEncrypt(user.Password));
+            dbComm.Parameters.AddWithValue("@UserID", user.UserID);
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
+
+        public DataTable GetUserByID(int id)
+        {
+
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_SelectUserByID", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+            dbComm.Parameters.AddWithValue("@UserID", id);
+
+            dbAdapter = new SqlDataAdapter(dbComm);
+            dt = new DataTable();
+            dbAdapter.Fill(dt);
+            dbconn.Close();
+            return dt;
+
+
+        }
 
         #endregion
     }

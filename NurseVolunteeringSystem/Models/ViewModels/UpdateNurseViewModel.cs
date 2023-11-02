@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace NurseVolunteeringSystem.Models.ViewModels
 {
-    public class UpdateNurseVM
+    public class UpdateNurseViewModel
     {
-        public int UserID { get; set; }
+        public int NurseID { get; set; }
         [Required(ErrorMessage = "Please enter first name")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Please enter surname")]
@@ -27,6 +27,5 @@ namespace NurseVolunteeringSystem.Models.ViewModels
         public string ContactNo { get; set; }
         [Required(ErrorMessage = "Please select gender")]
         public int GenderID { get; set; }
-        
     }
 }

@@ -171,7 +171,7 @@ namespace NurseVolunteeringSystem.Controllers
                 user.Username = dt.Rows[i]["Username"].ToString();
                 user.FirstName = dt.Rows[i]["FirstName"].ToString();
                 user.Surname = dt.Rows[i]["Surname"].ToString();
-                user.IDNumber = dt.Rows[i]["IDNumber"].ToString();
+               
                 user.Email = dt.Rows[i]["Email"].ToString();
                 user.ContactNo = dt.Rows[i]["ContactNo"].ToString();
                 user.UserType = dt.Rows[i]["UserType"].ToString();
@@ -241,7 +241,7 @@ namespace NurseVolunteeringSystem.Controllers
             
             user.FirstName = dt.Rows[0]["FirstName"].ToString();
             user.Surname = dt.Rows[0]["Surname"].ToString();
-            user.IDNumber = dt.Rows[0]["IDNumber"].ToString();
+           
             user.Email = dt.Rows[0]["Email"].ToString();
             user.GenderID = int.Parse(dt.Rows[0]["GenderID"].ToString());
             user.ContactNo = dt.Rows[0]["ContactNo"].ToString();
