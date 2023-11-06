@@ -73,10 +73,11 @@
 
 
                     <td>
-                        <a asp-controller="CareContract" asp-action="EditContract" asp-area="Nurse" asp-route-id="@item.CareContractID">Edit contract</a> |
-                        <a asp-controller="CareContract" asp-area="Nurse" asp-action="AddCareVisit" asp-route-id="@item.CareContractID">Add care visit</a> |
-                        <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListCareVisits" asp-route-id="@item.CareContractID">List care visits</a> |
-                        <a asp-controller="CareContract" asp-area="Nurse" asp-action="CloseContract" asp-route-id="@item.CareContractID">Close contract</a>
+                        <a  asp-controller="CareContract" asp-action="ListPatientConditions" asp-area="Nurse" asp-route-id="@item.CareContractID">View patient conditions</a><br />
+                        <a  asp-controller="CareContract" asp-action="EditContract" asp-area="Nurse" asp-route-id="@item.CareContractID">Edit contract</a><br />
+                        <a  asp-controller="CareContract" asp-area="Nurse" asp-action="AddCareVisit" asp-route-id="@item.CareContractID">Add care visit</a> <br />
+                        <a  asp-controller="CareContract" asp-area="Nurse" asp-action="ListCareVisits" asp-route-id="@item.CareContractID">List care visits</a><br />
+                        <a  asp-controller="CareContract" asp-area="Nurse" asp-action="CloseContract" asp-route-id="@item.CareContractID">Close contract</a>
                     </td>
                 </tr>
             }

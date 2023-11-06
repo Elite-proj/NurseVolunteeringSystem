@@ -9,8 +9,10 @@
 <h1>ListCareVisits</h1>
 
 <p>
-    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListAssignedContracts">Back</a>
+    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListAssignedContracts">Back</a><br/>
+    
 </p>
+<div class="text-right"><a class="btn btn-primary" asp-controller="CareContract" asp-area="Nurse" asp-action="DownloadCareVisitPDF" asp-route-id="@ViewBag.ContractID">Download</a></div>
 @if (Model != null)
 {
     <table class="table">

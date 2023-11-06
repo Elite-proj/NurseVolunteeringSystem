@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,16 +23,43 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ChronicCondition" asp-action="Index">Manage Conditions</a>
+                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Home" asp-action="Index">Manage Conditions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="City" asp-action="Index">Manage City</a>
+                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="City" asp-action="Index">Manage City</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Suburb" asp-action="Index">Manage Suburbs</a>
+                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Suburb" asp-action="Index">Manage Suburbs</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Contract" asp-action="ListContracts">List contracts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Contract" asp-action="ContractsByDate">List by dates contracts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Contract" asp-action="ListAssignedContracts">List assigned contracts</a>
+                        </li>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @Context.Session.GetString("Names")
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item btn btn-danger" asp-controller="Account" asp-action="Logout" asp-area="">Logout</a>
+                            </div>
+                        </li>
+
+
                     </ul>
+
+
+
                 </div>
+               
             </div>
         </nav>
     </header>

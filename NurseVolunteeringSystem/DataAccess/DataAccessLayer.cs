@@ -552,6 +552,7 @@ namespace NurseVolunteeringSystem.DataAccess
         {
 
             string connString = _configuration.GetConnectionString("connString");
+
             dbconn = new SqlConnection(connString);
 
             try

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.PatientChronicCondition>
+
+@{
+    ViewData["Title"] = "ListPatientConditions";
+}
+
+<h1>ListPatientConditions</h1>
+
+<p>
+    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListAssignedContracts">Back</a>
+</p>
+<div class="text-right"><a class="btn btn-primary" asp-controller="CareContract" asp-area="Nurse" asp-action="DownloadPatientConditionsPDF" asp-route-id="@ViewBag.ContractID">Download</a></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ChronicCondition.ConditionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChronicCondition.Description)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChronicCondition.ConditionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChronicCondition.Description)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

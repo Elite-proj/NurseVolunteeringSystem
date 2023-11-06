@@ -90,16 +90,30 @@ namespace NurseVolunteeringSystem.Controllers
 
                 if(dt.Rows.Count>0)
                 {
-                    if(dt.Rows[0]["UserType"].ToString()=="A")
+                    string names;
+                    
+
+                    if (dt.Rows[0]["UserType"].ToString()=="A")
                     {
+                        names = dt.Rows[0]["Username"].ToString();
+
+                        HttpContext.Session.SetString("Names", names);
+
                         return RedirectToAction("HomePage", "Home");
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "O")
                     {
+                        names = dt.Rows[0]["FirstName"].ToString() + " " + dt.Rows[0]["Surname"].ToString();
+
+                        HttpContext.Session.SetString("Names", names);
                         return RedirectToAction("HomePage", "Home", new { area = "Manager" });
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "N")
                     {
+                        names = dt.Rows[0]["FirstName"].ToString() + " " + dt.Rows[0]["Surname"].ToString();
+
+                        HttpContext.Session.SetString("Names", names);
+
                         HttpContext.Session.SetInt32("NurseID", Convert.ToInt32(dt.Rows[0]["UserID"].ToString()));
 
                        return RedirectToAction("HomePage", "Home", new { area = "Nurse" });
@@ -107,6 +121,10 @@ namespace NurseVolunteeringSystem.Controllers
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "P")
                     {
+                        names = dt.Rows[0]["FirstName"].ToString() + " " + dt.Rows[0]["Surname"].ToString();
+
+                        HttpContext.Session.SetString("Names", names);
+
                         HttpContext.Session.SetInt32("PatientID", Convert.ToInt32(dt.Rows[0]["UserID"].ToString()));
                         return RedirectToAction("HomePage", "Home", new { area = "Patient" });
                     }
@@ -129,6 +147,14 @@ namespace NurseVolunteeringSystem.Controllers
                 return View(user);
                 
             }
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Login","Account", new { area = "" });
         }
     }
 }
