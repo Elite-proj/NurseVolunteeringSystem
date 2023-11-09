@@ -6,13 +6,16 @@
 <head>
     <script src="~/lib/jquery/dist/jquery.js"></script>
 </head>
-
-<h1>UpdatePatientPersonalInfo</h1>
-
-<h4>User</h4>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Update Personal Details</h5>
+    </div>
+</div>
 <hr />
+<br />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-controller="Home" asp-area="Patient" asp-action="UpdatePatientPersonalInfo">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PatientID" />

@@ -7,18 +7,21 @@
 <head>
     <script src="~/lib/jquery/dist/jquery.js"></script>
 </head>
-
-<h1>UpdatePreferredSuburb</h1>
-
-<h4>PrefferedSuburb</h4>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Update Preffered Suburbs</h5>
+    </div>
+</div>
 <hr />
-<div>
-    <div>
+<br />
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
         <form asp-controller="PreferredSuburb" asp-action="UpdatePreferredSuburb" asp-area="Nurse" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PrefferedSuburbID" />
             <div class="form-group">
-                <label class="control-label">City</label>
+                <label class="control-label">Select  City  8</label>
                 <select id="CityList" class="form-control" asp-items="ViewBag.Cities">
                     <option value="@Model.Suburb.CityID" selected></option>
                 </select>
@@ -27,14 +30,14 @@
             </div>
             <div class="form-group">
                 <div class="form-group">
-                    <label asp-for="SuburbID" class="control-label"></label>
+                    <label asp-for="SuburbID" class="control-label">Select Suburb *</label>
                     <select id="SuburbList" asp-for="SuburbID" class="form-control" asp-items="@(new SelectList(string.Empty,"Value","Text"))"></select>
                 </div>
                 <span asp-validation-for="SuburbID" class="text-danger"></span>
             </div>
             <input asp-for="NurseID" hidden />
             <input asp-for="Status" hidden />
-           
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

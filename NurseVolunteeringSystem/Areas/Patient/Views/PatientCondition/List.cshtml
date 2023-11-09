@@ -3,11 +3,13 @@
 @{
     ViewData["Title"] = "List";
 }
-
-<h1>List</h1>
-
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Chronic Conditions List</h5>
+    </div>
+</div>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="PatientCondition" asp-area="Patient" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -23,19 +25,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChronicCondition.ConditionName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChronicCondition.Description)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChronicCondition.ConditionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChronicCondition.Description)
+                </td>
 
-            <td>
-                <a asp-action="ConfirmDelete" asp-controller="PatientCondition" asp-area="Patient" asp-route-id="@item.PatientChronicConditionID">Delete</a>
-            </td>
-        </tr>
-}
+                <td>
+                    <a asp-action="ConfirmDelete" asp-controller="PatientCondition" asp-area="Patient" asp-route-id="@item.PatientChronicConditionID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

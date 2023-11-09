@@ -3,10 +3,15 @@
 @{
     ViewData["Title"] = "ListContracts";
 }
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">List contracts</h5>
+    </div>
+</div>
+<hr />
 
-<h1>ListContracts</h1>
-
-
+<a asp-controller="Contract" asp-action="ListContracts" asp-area="Manager">Back to List</a>
+<br/>
 <table class="table">
     <thead>
         <tr>

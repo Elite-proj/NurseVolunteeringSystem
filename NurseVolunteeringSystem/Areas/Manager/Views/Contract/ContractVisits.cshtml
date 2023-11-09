@@ -4,30 +4,30 @@
     ViewData["Title"] = "ContractVisits";
 }
 
-<h1>ContractVisits</h1>
-
-<h4>CareVisit</h4>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Contract care visits</h5>
+    </div>
+</div>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-controller="Contract" asp-area="Manager" asp-action="ContractVisits" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="contractID" value="@ViewBag.ContractID" />
-            <div class="form-group row">
-                <div class="col-sm-2"><label>Minimum Date:</label></div> <div class="col-sm-4">
+            <div class="input-group">
+                <div class="col-6 form-group">
+                    <label asp-for="MinDate">Minimum Date *</label>
                     <input asp-for="MinDate" type="date" class="form-control" />
-                </div>
-                <div class="col">
                     <span asp-validation-for="MinDate" class="text-danger"></span>
                 </div>
-            </div> <div class="form-group row">
-                <div class="col-sm-2"><label>Maximum Date:</label></div> <div class="col-sm-4">
-                    <input type="date" asp-for="MaxDate" class="form-control" />
-                </div>
-                <div class="col">
+                <div class="col-6 form-group">
+                    <label asp-for="MaxDate">Maximum Date *</label>
+                    <input asp-for="MaxDate" type="date" class="form-control" />
                     <span asp-validation-for="MaxDate" class="text-danger"></span>
                 </div>
             </div>
+           
             <div class="row">
                 <div class="offset-2 col-sm-4">
                     <button type="submit" class="btn btn-primary">Search</button>
@@ -38,7 +38,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Contract" asp-action="ListAssignedContracts" asp-area="Manager">Back to List</a>
 </div>
 
 @section Scripts {

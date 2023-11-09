@@ -8,25 +8,25 @@
 <hr />
 <br />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SuburbName" class="control-label text-dark"></label>
+                <label asp-for="SuburbName" class="control-label text-dark">Suburb Name *</label>
                 <input asp-for="SuburbName" class="form-control" />
                 <span asp-validation-for="SuburbName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PostalCode" class="control-label text-dark"></label>
+                <label asp-for="PostalCode" class="control-label text-dark">Postal Code *</label>
                 <input asp-for="PostalCode" class="form-control" />
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City.CityName" class="control-label text-dark"></label>
-                <select asp-for="City.CityName" asp-items="@(new SelectList(ViewBag.Cities, "CityName", "CityName"))" class="form-control">
+                <label asp-for="CityID" class="control-label text-dark">Select City *</label>
+                <select asp-for="CityID" asp-items="@(new SelectList(ViewBag.Cities, "CityName", "CityName"))" class="form-control">
                     <option value="" disabled>Select City</option>
                 </select>
-                <span asp-validation-for="City.CityName" class="text-danger"></span>
+                <span asp-validation-for="CityID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label text-dark"></label>

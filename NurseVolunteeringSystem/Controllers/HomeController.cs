@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NurseVolunteeringSystem.Models;
 using System;
@@ -11,11 +12,12 @@ namespace NurseVolunteeringSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private AppDBContext context { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController( AppDBContext ctx)
         {
-            _logger = logger;
+            
+            this.context = ctx;
         }
 
         public IActionResult Index()
@@ -26,6 +28,16 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult HomePage()
         {
+            ViewBag.TotalManagers = context.Users.Where(u => u.UserType == "O").Count();
+            ViewBag.TotalNurses = context.Users.Where(u => u.UserType == "N").Count();
+            ViewBag.TotalPatients = context.Users.Where(u => u.UserType == "P").Count();
+            ViewBag.TotalContracts = context.CareContract.Where(c => c.DeleteStatus == "Active").Count();
+
+            DateTime Maxdate = DateTime.Today;
+            DateTime MinDate = DateTime.Today.AddDays(-3);
+
+            var Contracts = context.CareContract.Where(c => c.ContractDate <= Maxdate && c.ContractDate >= MinDate && c.ContractStatus == "N" && c.DeleteStatus=="Active").Include(s=>s.Suburb).OrderBy(o => o.ContractDate);
+
             return View();
         }
 

@@ -3,9 +3,13 @@
 @{
     ViewData["Title"] = "SuburbsResults";
 }
-
-<h1>Suburbs Results</h1>
-
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Suburbs List</h5>
+    </div>
+</div>
+<hr />
+<br/>
 <p>
     <a asp-controller="PrefferedSuburb" asp-area="Manager" asp-action="ListSuburbs">Back</a>
 </p>
@@ -42,7 +46,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Suburb.City.CityName)
                 </td>
-                
+
             </tr>
         }
     </tbody>

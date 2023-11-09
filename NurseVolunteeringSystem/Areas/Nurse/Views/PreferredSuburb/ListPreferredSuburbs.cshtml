@@ -4,10 +4,16 @@
     ViewData["Title"] = "ListPreferredSuburbs";
 }
 
-<h1>ListPreferredSuburbs</h1>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">List Preffered Suburbs</h5>
+    </div>
+</div>
+<hr />
+<br />
 
 <p>
-    <a asp-controller="PreferredSuburb" asp-action="AddPreferredSuburb"  asp-area="Nurse">Create New</a>
+    <a asp-controller="PreferredSuburb" asp-action="AddPreferredSuburb" asp-area="Nurse">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -25,24 +31,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Suburb.SuburbName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Suburb.PostalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Suburb.City.CityName)
-            </td>
-           
-            <td>
-                <a asp-controller="PreferredSuburb" asp-action="UpdatePreferredSuburb" asp-area="Nurse" asp-route-id="@item.PrefferedSuburbID">Edit</a> |
-                
-                <a asp-controller="PreferredSuburb" asp-action="ConfirmPreferredSuburb" asp-area="Nurse" asp-route-id="@item.PrefferedSuburbID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.SuburbName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.PostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.City.CityName)
+                </td>
+
+                <td>
+                    <a asp-controller="PreferredSuburb" asp-action="UpdatePreferredSuburb" asp-area="Nurse" asp-route-id="@item.PrefferedSuburbID">Edit</a> |
+
+                    <a asp-controller="PreferredSuburb" asp-action="ConfirmPreferredSuburb" asp-area="Nurse" asp-route-id="@item.PrefferedSuburbID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

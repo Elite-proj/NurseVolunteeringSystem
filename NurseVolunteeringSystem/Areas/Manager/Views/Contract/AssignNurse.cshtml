@@ -11,16 +11,14 @@
 </div>
 <hr />
 <br />
-
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="AssignNurse" asp-controller="Contract" asp-area="Manager" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CareContractID" />
 
             <div class="form-group">
-                <label asp-for="NurseID" class="control-label"></label>
+                <label asp-for="NurseID" class="control-label">Nurses *</label>
                 <select asp-for="NurseID" class="form-control" asp-items="ViewBag.Nurses"></select>
                 <span asp-validation-for="NurseID" class="text-danger"></span>
             </div>
@@ -32,7 +30,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Contract" asp-action="ListContracts" asp-area="Manager">Back to List</a>
 </div>
 
 @section Scripts {

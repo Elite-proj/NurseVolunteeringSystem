@@ -123,7 +123,7 @@ namespace NurseVolunteeringSystem.Controllers
                     }
                     else if(dt.Rows[0]["UserType"].ToString() == "O")
                     {
-                        names = dt.Rows[0]["FirstName"].ToString() + " " + dt.Rows[0]["Surname"].ToString();
+                        names = dt.Rows[0]["Username"].ToString();
 
                         HttpContext.Session.SetString("Names", names);
                         return RedirectToAction("HomePage", "Home", new { area = "Manager" });

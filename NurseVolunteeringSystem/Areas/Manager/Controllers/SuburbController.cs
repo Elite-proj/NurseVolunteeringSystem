@@ -39,20 +39,18 @@ namespace NurseVolunteeringSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingCity = _context.City.FirstOrDefault(c => c.CityName == model.City.CityName);
-
-                if (existingCity != null)
-                {
-                    model.City = existingCity; 
-                }
-
+                
                 _context.Suburb.Add(model);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else
+            {
+                ViewBag.Cities = _context.City.ToList();
+                return View(model);
+            }
 
-            ViewBag.Cities = _context.City.ToList();
-            return View(model);
+            
         }
 
         [Area("Manager")]
@@ -65,6 +63,7 @@ namespace NurseVolunteeringSystem.Controllers
                 return NotFound();
             }
 
+
             ViewBag.Cities = _context.City.ToList();
             return View(suburb);
         }
@@ -75,20 +74,19 @@ namespace NurseVolunteeringSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingCity = _context.City.FirstOrDefault(c => c.CityName == model.City.CityName);
-
-                if (existingCity != null)
-                {
-                    model.City = existingCity; 
-                }
+                
 
                 _context.Suburb.Update(model);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else
+            {
+                ViewBag.Cities = _context.City.ToList();
+                return View(model);
+            }
 
-            ViewBag.Cities = _context.City.ToList();
-            return View(model);
+           
         }
 
         [Area("Manager")]

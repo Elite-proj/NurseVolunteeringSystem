@@ -3,38 +3,41 @@
 @{
     ViewData["Title"] = "EditContract";
 }
-
-<h1>EditContract</h1>
-
-<h4>CareContract</h4>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Edit Contract</h5>
+    </div>
+</div>
 <hr />
+<br />
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="EditContract">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CareContractID" />
             <div class="form-group">
-                <label asp-for="ContractDate" class="control-label"></label>
+                <label asp-for="ContractDate" class="control-label">Contract Date</label>
                 <input asp-for="ContractDate" disabled class="form-control" />
                 <span asp-validation-for="ContractDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressLine1" class="control-label"></label>
+                <label asp-for="AddressLine1" class="control-label">Address Line 1</label>
                 <input asp-for="AddressLine1" disabled class="form-control" />
                 <span asp-validation-for="AddressLine1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AddressLine2" class="control-label"></label>
+                <label asp-for="AddressLine2" class="control-label">Address Line 2</label>
                 <input asp-for="AddressLine2" disabled class="form-control" />
                 <span asp-validation-for="AddressLine2" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WoundDescription" class="control-label"></label>
+                <label asp-for="WoundDescription" class="control-label">Wound Description</label>
                 <input asp-for="WoundDescription" disabled class="form-control" />
                 <span asp-validation-for="WoundDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartCareDate" class="control-label"></label>
+                <label asp-for="StartCareDate" class="control-label"> Start Care Date *</label>
                 <input asp-for="StartCareDate" type="date" class="form-control" />
                 <span asp-validation-for="StartCareDate" class="text-danger"></span>
             </div>

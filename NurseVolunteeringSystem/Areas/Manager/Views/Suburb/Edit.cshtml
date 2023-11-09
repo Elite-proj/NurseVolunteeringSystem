@@ -8,22 +8,22 @@
 <hr />
 <br />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 offset-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="SuburbID" />
             <div class="form-group">
-                <label asp-for="SuburbName" class="control-label text-dark"></label>
+                <label asp-for="SuburbName" class="control-label text-dark">Suburb Name *</label>
                 <input asp-for="SuburbName" class="form-control" />
                 <span asp-validation-for="SuburbName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PostalCode" class="control-label text-dark"></label>
+                <label asp-for="PostalCode" class="control-label text-dark">Postal Code *</label>
                 <input asp-for="PostalCode" class="form-control" />
                 <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
              <div class="form-group">
-                <label asp-for="City.CityName" class="control-label text-dark"></label>
+                <label asp-for="City.CityName" class="control-label text-dark">Select City *</label>
 
                 <select asp-for="City.CityName" class="form-control">
                     @foreach (City item in ViewBag.Cities)

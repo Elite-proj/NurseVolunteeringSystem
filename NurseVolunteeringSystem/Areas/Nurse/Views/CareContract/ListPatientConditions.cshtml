@@ -3,14 +3,19 @@
 @{
     ViewData["Title"] = "ListPatientConditions";
 }
-
-<h1>ListPatientConditions</h1>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">List Patient Conditions</h5>
+    </div>
+</div>
+<hr />
+<br />
 
 <p>
     <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListAssignedContracts">Back</a>
 </p>
 <div class="text-right"><a class="btn btn-primary" asp-controller="CareContract" asp-area="Nurse" asp-action="DownloadPatientConditionsPDF" asp-route-id="@ViewBag.ContractID">Download</a></div>
-<br/>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -20,20 +25,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.ChronicCondition.Description)
             </th>
-            
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChronicCondition.ConditionName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChronicCondition.Description)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChronicCondition.ConditionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChronicCondition.Description)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

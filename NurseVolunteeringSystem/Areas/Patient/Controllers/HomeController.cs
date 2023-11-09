@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NurseVolunteeringSystem.DataAccess;
 using NurseVolunteeringSystem.Models.ViewModels;
@@ -35,6 +36,14 @@ namespace NurseVolunteeringSystem.Areas.Patient.Controllers
         [HttpGet]
         public IActionResult HomePage()
         {
+            int id = (int)HttpContext.Session.GetInt32("PatientID");
+
+            ViewBag.TotalClosedContracts = context.CareContract.Where(c => c.PatientID == id && c.ContractStatus == "C").Count();
+            ViewBag.TotalUnassignedContracts = context.CareContract.Where(c => c.PatientID == id && c.ContractStatus == "N" && c.DeleteStatus == "Active").Count();
+            ViewBag.AssignedContracts = context.CareContract.Where(c => c.PatientID == id && c.ContractStatus == "A" && c.DeleteStatus == "Active").Count();
+            ViewBag.UpcomingVisits = context.CareVisit.Include(c => c.CareContract).Where(p => p.CareContract.PatientID == id && p.CareContract.DeleteStatus == "Active" && p.Status=="Active" && p.VisitDate >= DateTime.Now).Count();
+
+            var CareVisits = context.CareVisit.Include(c => c.CareContract).ThenInclude(s => s.Suburb).Where(p => p.CareContract.PatientID == id && p.CareContract.DeleteStatus == "Active" && p.Status == "Active" && p.VisitDate >= DateTime.Now).OrderBy(o => o.VisitDate);
             return View();
         }
 

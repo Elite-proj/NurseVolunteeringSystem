@@ -3,8 +3,12 @@
 @{
     ViewData["Title"] = "ListContracts";
 }
-
-<h1>ListContracts</h1>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">List contracts</h5>
+    </div>
+</div>
+<hr />
 
 
 <table class="table">
@@ -34,42 +38,43 @@
             <th>
                 @Html.DisplayNameFor(model => model.ContractStatus)
             </th>
- 
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContractDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddressLine1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddressLine2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Suburb.SuburbName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WoundDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartCareDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndCareDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContractStatus)
-            </td>
-            
-            <td>
-                <a asp-controller="Contract" asp-area="Manager" asp-action="AssignNurse" asp-route-id="@item.CareContractID">Assign Nurse</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressLine1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressLine2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.SuburbName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WoundDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartCareDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndCareDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractStatus)
+                </td>
+
+                <td>
+                    <a asp-controller="Contract" asp-area="Manager" asp-action="AssignNurse" asp-route-id="@item.CareContractID">Assign Nurse</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

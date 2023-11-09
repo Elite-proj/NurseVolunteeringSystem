@@ -8,26 +8,29 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
 </head>
 
-<h1>AddPreferredSuburb</h1>
-
-<h4>PrefferedSuburb</h4>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Add City</h5>
+    </div>
+</div>
 <hr />
-<div>
-    <div>
+<br />
+<div class="row">
+    <div class="col-md-4 offset-md-4">
         <form asp-controller="PreferredSuburb" asp-action="AddPreferredSuburb" asp-area="Nurse" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">City</label>
+                <label class="control-label">Select City  *</label>
                 <select id="CityList" class="form-control" asp-items="ViewBag.Cities">
                 </select>
                 <span asp-validation-for="@Model.Suburb.CityID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SuburbID" class="control-label"></label>
+                <label asp-for="SuburbID" class="control-label">Select Suburb *</label>
                 <select id="SuburbList" asp-for="SuburbID" class="form-control" asp-items="@(new SelectList(string.Empty,"Value","Text"))"></select>
                 <span asp-validation-for="SuburbID" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

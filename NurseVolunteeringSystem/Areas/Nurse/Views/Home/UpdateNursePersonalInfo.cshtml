@@ -3,51 +3,54 @@
 @{
     ViewData["Title"] = "UpdateNurse";
 }
-
-<h1>UpdateNurse</h1>
-
-<h4>User</h4>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Update Personal Details</h5>
+    </div>
+</div>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<br />
+<div class="justify-content-center">
+    <div>
         <form asp-controller="Home" asp-action="UpdateNursePersonalInfo" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="NurseID" />
 
-           
+
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
+                <label asp-for="FirstName" class="control-label">First Name *</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
+                <label asp-for="Surname" class="control-label">Surname *</label>
                 <input asp-for="Surname" class="form-control" />
                 <span asp-validation-for="Surname" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="GenderID" class="control-label"></label>
+                <label asp-for="GenderID" class="control-label">Gender *</label>
                 <select asp-for="GenderID" class="form-control" asp-items="ViewBag.Genders">
                     <option value="@Model.GenderID" selected></option>
                 </select>
                 <span asp-validation-for="GenderID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
+                <label asp-for="ContactNo" class="control-label">Contact No*</label>
+                <input asp-for="ContactNo" class="form-control" />
+                <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email *</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConfirmEmail" class="control-label"></label>
+                <label asp-for="ConfirmEmail" class="control-label">Confirm Email *</label>
                 <input asp-for="ConfirmEmail" class="form-control" />
                 <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ContactNo" class="control-label"></label>
-                <input asp-for="ContactNo" class="form-control" />
-                <span asp-validation-for="ContactNo" class="text-danger"></span>
-            </div>
+
 
 
             <div class="form-group">

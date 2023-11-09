@@ -1,14 +1,142 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model IEnumerable<NurseVolunteeringSystem.Models.CareVisit>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Patient landing</h1>
-    <a asp-controller="CareContract" asp-action="create" asp-area="Patient">Add care contract</a>
-    <a asp-controller="PatientCondition" asp-action="Create" asp-area="Patient">Add patient condition</a>
-    <a asp-controller="Home" asp-action="ChangePassword" asp-area="Patient">Change Password</a><br />
-    <a asp-controller="Home" asp-action="UpdatePatientPersonalInfo" asp-area="Patient">Update personal info</a><br />
+<div class="container">
+    <div class="row">
+
+        <!-- Number of Prescriptions Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Number Of Closed Contracts
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalClosedContracts</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rejected Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Number Of Unassigned Contracts
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalUnassignedContracts</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Number Of Assigned Contracts
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.AssignedContracts</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Number Of Upcoming Visits
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.UpcomingVisits</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <!-- Area Table-->
+        <div class="col-xl-12 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Upcoming visits</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="col-9 border p-3">
+                        <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Visit Date</th>
+                                    <th>Address Line 1</th>
+                                    <th>Address Line 2</th>
+                                    <th>Suburb Name</th>
+                                    <th>PostalCode</th>
+                                    <th>Wound Description</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (Model != null)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.VisitDate</td>
+                                                <td>@item.CareContract.AddressLine1 </td>
+                                                <td>@item.CareContract.AddressLine2</td>
+                                                <td>@item.CareContract.Suburb.SuburbName</td>
+                                                <td>@item.CareContract.Suburb.PostalCode</td>
+                                                <td>@item.CareContract.WoundDescription</td>
+
+
+                                            </tr>
+
+                                        }
+                                    }
+
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

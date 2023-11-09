@@ -3,8 +3,12 @@
 @{
     ViewData["Title"] = "ListAssignedContracts";
 }
-
-<h1>ListAssignedContracts</h1>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">List  Assigned Contracts</h5>
+    </div>
+</div>
+<hr />
 
 
 @if (Model != null)
@@ -73,11 +77,11 @@
 
 
                     <td>
-                        <a  asp-controller="CareContract" asp-action="ListPatientConditions" asp-area="Nurse" asp-route-id="@item.CareContractID">View patient conditions</a><br />
-                        <a  asp-controller="CareContract" asp-action="EditContract" asp-area="Nurse" asp-route-id="@item.CareContractID">Edit contract</a><br />
-                        <a  asp-controller="CareContract" asp-area="Nurse" asp-action="AddCareVisit" asp-route-id="@item.CareContractID">Add care visit</a> <br />
-                        <a  asp-controller="CareContract" asp-area="Nurse" asp-action="ListCareVisits" asp-route-id="@item.CareContractID">List care visits</a><br />
-                        <a  asp-controller="CareContract" asp-area="Nurse" asp-action="CloseContract" asp-route-id="@item.CareContractID">Close contract</a>
+                        <a asp-controller="CareContract" asp-action="ListPatientConditions" asp-area="Nurse" asp-route-id="@item.CareContractID">View patient conditions</a><br />
+                        <a asp-controller="CareContract" asp-action="EditContract" asp-area="Nurse" asp-route-id="@item.CareContractID">Edit contract</a><br />
+                        <a asp-controller="CareContract" asp-area="Nurse" asp-action="AddCareVisit" asp-route-id="@item.CareContractID">Add care visit</a> <br />
+                        <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListCareVisits" asp-route-id="@item.CareContractID">List care visits</a><br />
+                        <a asp-controller="CareContract" asp-area="Nurse" asp-action="CloseContract" asp-route-id="@item.CareContractID">Close contract</a>
                     </td>
                 </tr>
             }
