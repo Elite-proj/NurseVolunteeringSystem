@@ -4,16 +4,21 @@
     ViewData["Title"] = "AssignNurse";
 }
 
-<h1>AssignNurse</h1>
+<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+    <div class="pt-1 m-0 row">
+        <h5 class="text-dark text-center ml-5" style="text-align:center">Assign Nurse</h5>
+    </div>
+</div>
+<hr />
+<br />
 
-<h4>CareContract</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AssignNurse" asp-controller="Contract" asp-area="Manager" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CareContractID" />
-            
+
             <div class="form-group">
                 <label asp-for="NurseID" class="control-label"></label>
                 <select asp-for="NurseID" class="form-control" asp-items="ViewBag.Nurses"></select>

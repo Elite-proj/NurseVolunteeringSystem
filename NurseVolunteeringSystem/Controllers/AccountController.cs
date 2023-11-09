@@ -10,6 +10,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using NurseVolunteeringSystem.Password;
+using NurseVolunteeringSystem.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace NurseVolunteeringSystem.Controllers
 {
@@ -40,6 +42,24 @@ namespace NurseVolunteeringSystem.Controllers
             return View();
         }
 
+        public IActionResult AddAdmin()
+        {
+            User user = new User();
+            user.UserID = 7;
+            user.Username = "Admin";
+            user.Password = "HepingHands";
+            user.UserType = "A";
+            user.Status = "Active";
+            user.GenderID = 1;
+            user.SuburbID = 12;
+            user.Password = PasswordEncryption.ConvertToEncrypt(user.Password);
+
+            context.Users.Update(user);
+
+            context.SaveChanges();
+
+            return View("Index","Home");
+        }
         public JsonResult GetSuburbs(int id)
         {
             var results = context.Suburb.Where(s => s.CityID == id).OrderBy(o => o.SuburbName);

@@ -1,0 +1,32 @@
+﻿@model NurseVolunteeringSystem.Models.Nurse
+
+@{
+    ViewData["Title"] = "ListSuburbs";
+}
+
+<h1>ListSuburbs</h1>
+
+<h4>Nurse</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="PrefferedSuburb" asp-area="Manager" asp-action="ListSuburbs">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NurseID" class="control-label">Select nurse *</label>
+                <select asp-for="NurseID" class ="form-control" asp-items="ViewBag.Nurses"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

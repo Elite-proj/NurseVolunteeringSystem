@@ -1,0 +1,49 @@
+﻿@model IEnumerable<NurseVolunteeringSystem.Models.PrefferedSuburb>
+
+@{
+    ViewData["Title"] = "SuburbsResults";
+}
+
+<h1>Suburbs Results</h1>
+
+<p>
+    <a asp-controller="PrefferedSuburb" asp-area="Manager" asp-action="ListSuburbs">Back</a>
+</p>
+<div class="text-right"><a class="btn btn-primary" asp-controller="PrefferedSuburb" asp-area="Manager" asp-action="DownloadSuburbsList" asp-route-id="@ViewBag.NurseID">Download</a></div>
+<br />
+<p>FirstName: @ViewBag.FirstName</p>
+<p>Surname: @ViewBag.Surname</p>
+<p>Email: @ViewBag.Email</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Suburb.SuburbName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suburb.PostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Suburb.City.CityName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.SuburbName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.PostalCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suburb.City.CityName)
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
