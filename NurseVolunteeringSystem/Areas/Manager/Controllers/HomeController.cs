@@ -35,7 +35,7 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
             ViewBag.TotalContracts = totalContracts;
             ViewBag.TotalNurses = context.Users.Where(u => u.UserType == "N").Count();
 
-            double TotalAssignedContracts = context.CareContract.Where(c => c.ContractStatus == "A" && c.DeleteStatus == "Active").Count();
+            double TotalAssignedContracts = context.CareContract.Where(c => c.ContractStatus == "A" || c.ContractStatus=="C"  && c.DeleteStatus == "Active").Count();
 
             double AssignedContractPercentage = (TotalAssignedContracts / totalContracts) * 100;
 
