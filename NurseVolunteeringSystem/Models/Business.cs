@@ -16,17 +16,15 @@ namespace NurseVolunteeringSystem.Models
         [Required(ErrorMessage ="Please enter address line 1")]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
-        [Required(ErrorMessage ="Please select suburb")]
-        public string PostalCode { get; set; }
         [Required(ErrorMessage ="Please enter contacts")]
         public string ContactNo { get; set; }
         [Required(ErrorMessage ="Please enter email address")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please enter operating hours")]
         public string OperatingHours { get; set; }
-
-        public string SuburbID { get; set; }
-        [Required(ErrorMessage = "Please enter postal code")]
+        [Required(ErrorMessage = "Please select Suburb")]
+        public int SuburbID { get; set; }
+        
         public Suburb Suburb { get; set; }
     }
 }

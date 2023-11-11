@@ -1,0 +1,89 @@
+﻿@model NurseVolunteeringSystem.Models.Business
+
+@{
+    ViewData["Title"] = "UpdateBusinessInfo";
+}
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<h1>UpdateBusinessInfo</h1>
+
+<h4>Business</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <form asp-action="UpdateBusinessInfo">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BusinessID" />
+            <div class="form-group">
+                <label asp-for="OrganizationName" class="control-label">Organization Name *</label>
+                <input asp-for="OrganizationName" class="form-control" />
+                <span asp-validation-for="OrganizationName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NPONumber" class="control-label">NPO Number *</label>
+                <input asp-for="NPONumber" class="form-control" />
+                <span asp-validation-for="NPONumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressLine1" class="control-label">Address Line 1 *</label>
+                <input asp-for="AddressLine1" class="form-control" />
+                <span asp-validation-for="AddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddressLine2" class="control-label">Address Line 2</label>
+                <input asp-for="AddressLine2" class="form-control" />
+                <span asp-validation-for="AddressLine2" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ContactNo" class="control-label">Contact No</label>
+                <input asp-for="ContactNo" class="form-control" />
+                <span asp-validation-for="ContactNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email *</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OperatingHours" class="control-label">Operating Hours *</label>
+                <input asp-for="OperatingHours" class="form-control" />
+                <span asp-validation-for="OperatingHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label class="control-label">Select City *</label>
+                    <select id="CityList" class="form-control" asp-items="ViewBag.Cities"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="SuburbID" class="control-label">Select Suburb *</label>
+                <select id="SuburbList" asp-for="SuburbID" class="form-control" asp-items="@(new SelectList(string.Empty,"Value","Text"))"></select>
+                <span asp-validation-for="SuburbID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CityList").change(function () {
+            $.getJSON("/Account/GetSuburbs", { id: $("#CityList").val() }, function (d) {
+                var row = "";
+                $("#SuburbList").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#SuburbList").html(row);
+            })
+        })
+    })
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

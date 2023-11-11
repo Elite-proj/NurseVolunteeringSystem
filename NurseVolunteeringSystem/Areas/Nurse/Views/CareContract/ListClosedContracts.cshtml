@@ -3,17 +3,13 @@
 @{
     ViewData["Title"] = "ListClosedContracts";
 }
-<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+<div class="w-100 bg-primary">
     <div class="pt-1 m-0 row">
-        <h5 class="text-dark text-center ml-5" style="text-align:center">List Closed Contracts</h5>
+        <h5 class="text-white text-center ml-5" style="text-align:center">List Closed Contracts</h5>
     </div>
 </div>
 <hr />
 <br />
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -49,9 +45,12 @@
     <tbody>
         @foreach (var item in Model)
         {
+            string contractDate = item.ContractDate?.ToString("dd/MM/yyyy");
+            string startCareDate = item.StartCareDate?.ToString("dd/MM/yyyy");
+            string endCareDate = item.EndCareDate?.ToString("dd/MM/yyyy");
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ContractDate)
+                    @Html.DisplayFor(modelItem => contractDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AddressLine1)
@@ -66,10 +65,10 @@
                     @Html.DisplayFor(modelItem => item.WoundDescription)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartCareDate)
+                    @Html.DisplayFor(modelItem => startCareDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EndCareDate)
+                    @Html.DisplayFor(modelItem => endCareDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ContractStatus)
@@ -79,7 +78,7 @@
 
                 <td>
 
-                    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListClosedCareVisits" asp-route-id="@item.CareContractID">Details</a>
+                    <a asp-controller="CareContract" asp-area="Nurse" asp-action="ListClosedCareVisits" asp-route-id="@item.CareContractID" class="btn btn-outline-primary">Details</a>
 
                 </td>
             </tr>

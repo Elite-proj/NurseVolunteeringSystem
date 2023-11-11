@@ -9,13 +9,13 @@
 <div class="container">
     <div class="row">
 
-        <!-- Number of Prescriptions Example -->
+        
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Number Of Contracts
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalContracts</div>
@@ -34,7 +34,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Number Of Preffered Suburbs
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalPrefferedSuburbs</div>
@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Number Of upcoming visits
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalVisits</div>
@@ -99,8 +99,9 @@
                                     {
                                         foreach (var item in Model)
                                         {
+                                            string VisitDate = item.VisitDate.ToString("dd/MM/yyyy");
                                             <tr>
-                                                <td>@item.VisitDate</td>
+                                                <td>@VisitDate</td>
                                                 <td>@item.CareContract.AddressLine1 </td>
                                                 <td>@item.CareContract.AddressLine2</td>
                                                 <td>@item.CareContract.Suburb.SuburbName</td>

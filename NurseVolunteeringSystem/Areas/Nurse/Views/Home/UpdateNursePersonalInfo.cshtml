@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "UpdateNurse";
 }
-<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+<div class="w-100 bg-primary">
     <div class="pt-1 m-0 row">
-        <h5 class="text-dark text-center ml-5" style="text-align:center">Update Personal Details</h5>
+        <h5 class="text-white text-center ml-5" style="text-align:center">Update Personal Details</h5>
     </div>
 </div>
 <hr />
@@ -36,6 +36,11 @@
                 <span asp-validation-for="GenderID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="IDNumber" class="control-label">ID Number No*</label>
+                <input asp-for="IDNumber" class="form-control" />
+                <span asp-validation-for="IDNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="ContactNo" class="control-label">Contact No*</label>
                 <input asp-for="ContactNo" class="form-control" />
                 <span asp-validation-for="ContactNo" class="text-danger"></span>
@@ -61,7 +66,7 @@
 </div>
 
 <div>
-    <a asp-controller="ManageUsers" asp-action="ListNurses">Back to List</a>
+    <a asp-controller="ManageUsers" asp-action="ListNurses" asp-area="Nurse" class="btn btn-primary">Back to List</a>
 </div>
 
 @section Scripts {

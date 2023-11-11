@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "ListContracts";
 }
-<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+<div class="w-100 bg-primary">
     <div class="pt-1 m-0 row">
-        <h5 class="text-dark text-center ml-5" style="text-align:center">List contracts</h5>
+        <h5 class="text-white text-center ml-5" style="text-align:center">List contracts</h5>
     </div>
 </div>
 <hr />
@@ -73,7 +73,7 @@
                 </td>
 
                 <td>
-                    <a asp-controller="Contract" asp-area="Manager" asp-action="AssignNurse" asp-route-id="@item.CareContractID">Assign Nurse</a>
+                    <a asp-controller="Contract" asp-area="Manager" asp-action="AssignNurse" asp-route-id="@item.CareContractID" class="btn btn-primary">Assign Nurse</a>
                 </td>
             </tr>
         }

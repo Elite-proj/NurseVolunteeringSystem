@@ -22,6 +22,11 @@ namespace NurseVolunteeringSystem.Areas.Patient.Controllers
         [HttpGet]
         public IActionResult List()
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             int PatientID = int.Parse(HttpContext.Session.GetInt32("PatientID").ToString());
             var conditions = _context.Patient_ChronicConditions.Where(p => p.PatientID == PatientID && p.Status=="Active").Include(c => c.ChronicCondition).OrderBy(o => o.PatientChronicConditionID);
             return View(conditions);
@@ -30,6 +35,11 @@ namespace NurseVolunteeringSystem.Areas.Patient.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             ViewBag.Conditions = _context.ChronicCondition.OrderBy(o => o.ConditionName).ToList();
 
             return View();
@@ -58,6 +68,11 @@ namespace NurseVolunteeringSystem.Areas.Patient.Controllers
         [HttpGet]
         public IActionResult ConfirmDelete(int id)
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var conditions = _context.Patient_ChronicConditions.Where(p => p.PatientChronicConditionID == id).Include(c => c.ChronicCondition);
 
             return View(conditions);

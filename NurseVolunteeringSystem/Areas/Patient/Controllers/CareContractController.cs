@@ -21,6 +21,11 @@ namespace NurseVolunteeringSystem.Controllers
         
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             int PatientID = int.Parse(HttpContext.Session.GetInt32("PatientID").ToString());
             var careContracts = await _context.CareContract.Where(c=> c.DeleteStatus=="Active" && c.PatientID==PatientID).Include(s => s.Suburb).OrderBy(o=>o.CareContractID).ToListAsync();
             return View(careContracts);
@@ -29,6 +34,11 @@ namespace NurseVolunteeringSystem.Controllers
         
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             ViewBag.Suburbs = _context.Suburb.ToList();
             return View();
         }
@@ -73,6 +83,11 @@ namespace NurseVolunteeringSystem.Controllers
         
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -165,6 +180,11 @@ namespace NurseVolunteeringSystem.Controllers
         
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             if (id == null)
             {
                 return NotFound();

@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "ListContracts";
 }
-<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+<div class="w-100 bg-primary">
     <div class="pt-1 m-0 row">
-        <h5 class="text-dark text-center ml-5" style="text-align:center">List Contracts</h5>
+        <h5 class="text-white text-center ml-5" style="text-align:center">List Contracts</h5>
     </div>
 </div>
 <hr />
@@ -47,9 +47,12 @@
         <tbody>
             @foreach (var item in Model)
             {
+                string contractDate = item.ContractDate?.ToString("dd/MM/yyyy");
+                string startCareDate = item.StartCareDate?.ToString("dd/MM/yyyy");
+                string endCareDate = item.EndCareDate?.ToString("dd/MM/yyyy");
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ContractDate)
+                        @Html.DisplayFor(modelItem => contractDate)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.AddressLine1)
@@ -64,17 +67,17 @@
                         @Html.DisplayFor(modelItem => item.WoundDescription)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StartCareDate)
+                        @Html.DisplayFor(modelItem => startCareDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EndCareDate)
+                        @Html.DisplayFor(modelItem => endCareDate)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ContractStatus)
                     </td>
 
                     <td>
-                        <a class="btn btn-warning" asp-controller="CareContract" asp-area="Nurse" asp-action="Choose" asp-route-id="@item.CareContractID">Take contract</a>
+                        <a class="btn btn-primary" asp-controller="CareContract" asp-area="Nurse" asp-action="Choose" asp-route-id="@item.CareContractID">Take contract</a>
 
                     </td>
                 </tr>

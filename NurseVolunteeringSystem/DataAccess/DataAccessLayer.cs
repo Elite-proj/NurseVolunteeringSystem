@@ -27,6 +27,37 @@ namespace NurseVolunteeringSystem.DataAccess
         DataTable dt;
 
         #region Admin Area
+        public int RegisterAdmin(User user)
+        {
+            string connString = _configuration.GetConnectionString("connString");
+            dbconn = new SqlConnection(connString);
+
+            try
+            {
+                dbconn.Open();
+            }
+            catch
+            {
+
+            }
+
+            dbComm = new SqlCommand("sp_AddAdminUser", dbconn);
+            dbComm.CommandType = CommandType.StoredProcedure;
+
+           
+
+            dbComm.Parameters.AddWithValue("@Username", user.Username);
+            dbComm.Parameters.AddWithValue("@Email", user.Email);
+            dbComm.Parameters.AddWithValue("@Password", PasswordEncryption.ConvertToEncrypt(user.Password));
+            dbComm.Parameters.AddWithValue("@ContactNo", user.ContactNo);
+            
+
+
+            int x = dbComm.ExecuteNonQuery();
+            dbconn.Close();
+
+            return x;
+        }
 
         public int RegisterManager(ManagerViewModel manager)
         {
@@ -85,6 +116,7 @@ namespace NurseVolunteeringSystem.DataAccess
             dbComm.Parameters.AddWithValue("@EmailAddress", nurse.Email);
             dbComm.Parameters.AddWithValue("@Password", PasswordEncryption.ConvertToEncrypt(nurse.Password));
             dbComm.Parameters.AddWithValue("@ContactNo", nurse.ContactNo);
+            dbComm.Parameters.AddWithValue("@IDNumber", nurse.IDNumber);
             dbComm.Parameters.AddWithValue("@GenderID", nurse.GenderID);
             
             dbComm.Parameters.AddWithValue("@UserType", nurse.UserType);
@@ -442,6 +474,7 @@ namespace NurseVolunteeringSystem.DataAccess
             dbComm.Parameters.AddWithValue("@ContactNo", nurse.ContactNo);
             dbComm.Parameters.AddWithValue("@GenderID", nurse.GenderID);
             dbComm.Parameters.AddWithValue("@NurseID", nurse.NurseID);
+            dbComm.Parameters.AddWithValue("@IDNumber", nurse.IDNumber);
 
 
             int x = dbComm.ExecuteNonQuery();

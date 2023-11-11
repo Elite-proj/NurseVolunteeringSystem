@@ -5,15 +5,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NurseVolunteeringSystem</title>
+    <title>@ViewData["Title"] - HelpingHands</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-warning border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary text-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NurseVolunteeringSystem</a>
+                <a class="navbar-brand" asp-area="Patient" asp-controller="Home" asp-action="HomePage">Helping Hands</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,10 +22,10 @@
 
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="CareContract" asp-action="create" asp-area="Patient">Add care contract</a>
+                            <a class="nav-link text-white" asp-controller="CareContract" asp-action="create" asp-area="Patient">Add care contract</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="PatientCondition" asp-action="Create" asp-area="Patient">Add chronic condition</a>
+                            <a class="nav-link text-white" asp-controller="PatientCondition" asp-action="Create" asp-area="Patient">Add chronic condition</a>
                         </li>
                         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
                         &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;

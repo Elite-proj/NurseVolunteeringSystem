@@ -35,6 +35,10 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult ListContracts()
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
 
             int id= int.Parse(HttpContext.Session.GetInt32("NurseID").ToString());
 
@@ -77,6 +81,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult ListClosedContracts()
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             int id = int.Parse(HttpContext.Session.GetInt32("NurseID").ToString());
 
             var contracts = context.CareContract.Where(c => c.NurseID == id && c.ContractStatus=="C").Include(s => s.Suburb).OrderBy(o => o.CareContractID);
@@ -84,16 +93,27 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
             return View(contracts);
         }
 
+        [HttpGet]
         public IActionResult ListClosedCareVisits(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var careVisits = context.CareVisit.Where(c => c.CareContractID == id && c.Status == "Active").OrderBy(o => o.CareVisitID);
 
             return View(careVisits);
         }
 
-
+        [HttpGet]
         public IActionResult Choose(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var contract = context.CareContract.Find(id);
 
             contract.NurseID= int.Parse(HttpContext.Session.GetInt32("NurseID").ToString());
@@ -110,9 +130,14 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult ListAssignedContracts()
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             int id = int.Parse(HttpContext.Session.GetInt32("NurseID").ToString());
 
-            var contracts = context.CareContract.Where(c => c.NurseID == id).Include(s => s.Suburb).OrderBy(o => o.CareContractID);
+            var contracts = context.CareContract.Where(c => c.NurseID == id && c.ContractStatus=="A").Include(s => s.Suburb).OrderBy(o => o.CareContractID);
 
             return View(contracts);
         }
@@ -121,6 +146,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult ListPatientConditions(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var patient = context.CareContract.Find(id);
             ViewBag.ContractID = id;
 
@@ -226,6 +256,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult ListCareVisits(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             ViewBag.ContractID = id;
 
             var careVisits = context.CareVisit.Where(c => c.CareContractID == id && c.Status=="Active").OrderBy(o => o.CareVisitID);
@@ -335,6 +370,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult AddCareVisit(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             ViewBag.ContractID = id;
 
             return View();
@@ -362,6 +402,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult EditContract(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var cont  = context.CareContract.Find(id);
 
             EditContractVM contract = new EditContractVM();
@@ -409,6 +454,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         
         public IActionResult CloseContract(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var contract = context.CareContract.Find(id);
 
             contract.ContractStatus = "C";

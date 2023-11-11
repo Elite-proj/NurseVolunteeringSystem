@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NurseVolunteringSystem</title>
+    <title>@ViewData["Title"] - HelpingHands</title>
     
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -14,9 +14,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-warning border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary text-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Helping Hands</a>
+                <a class="navbar-brand" asp-area="Manager" asp-controller="Home" asp-action="HomePage">Helping Hands</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,28 +24,28 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="ChronicCondition" asp-action="create">Manage Conditions</a>
+                            <a class="nav-link text-white" asp-area="Manager" asp-controller="ChronicCondition" asp-action="create">Manage Conditions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="City" asp-action="create">Manage City</a>
+                            <a class="nav-link text-white" asp-area="Manager" asp-controller="City" asp-action="create">Manage City</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Suburb" asp-action="create">Manage Suburbs</a>
+                            <a class="nav-link text-white" asp-area="Manager" asp-controller="Suburb" asp-action="create">Manage Suburbs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Contract" asp-action="ListContracts">List contracts</a>
+                            <a class="nav-link text-white" asp-area="Manager" asp-controller="Contract" asp-action="ListContracts">List contracts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Contract" asp-action="ContractsByDate">List by dates contracts</a>
+                            <a class="nav-link text-white" asp-area="Manager" asp-controller="Contract" asp-action="ContractsByDate">contracts by date</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="Contract" asp-action="ListAssignedContracts">List assigned contracts</a>
+                            <a class="nav-link text-white" asp-area="Manager" asp-controller="Contract" asp-action="ListAssignedContracts">Assigned contracts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Manager" asp-controller="PrefferedSuburb" asp-action="ListSuburbs">Suburbs Per Nurse</a>
+                            <a class="nav-link text-white" asp-area="Manager" asp-controller="PrefferedSuburb" asp-action="ListSuburbs">Suburbs Per Nurse</a>
                         </li>
 
-                        &nbsp;&nbsp;
+                        
                         
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

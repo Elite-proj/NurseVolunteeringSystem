@@ -10,6 +10,7 @@ using NurseVolunteeringSystem.Models.ViewModels;
 using NurseVolunteeringSystem.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace NurseVolunteeringSystem.Controllers
 {
@@ -32,6 +33,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult RegisterManager()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             return View();
         }
 
@@ -55,6 +61,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult RegisterNurse()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var gender = context.Gender.OrderBy(o => o.GenderName);
 
             ViewBag.Genders = new SelectList(gender, "GenderID", "GenderName");
@@ -87,6 +98,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult RegisterPatient()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var gender = context.Gender.OrderBy(o => o.GenderName);
 
             var suburb = context.Suburb.OrderBy(s => s.SuburbName);
@@ -129,6 +145,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult ListManagers()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
 
             dt = data.ListManagers();
@@ -158,6 +179,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult ListNurses()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
 
             dt = data.ListNurses();
@@ -171,7 +197,7 @@ namespace NurseVolunteeringSystem.Controllers
                 user.Username = dt.Rows[i]["Username"].ToString();
                 user.FirstName = dt.Rows[i]["FirstName"].ToString();
                 user.Surname = dt.Rows[i]["Surname"].ToString();
-               
+               user.IDNumber = dt.Rows[i]["IDNumber"].ToString();
                 user.Email = dt.Rows[i]["Email"].ToString();
                 user.ContactNo = dt.Rows[i]["ContactNo"].ToString();
                 user.UserType = dt.Rows[i]["UserType"].ToString();
@@ -193,6 +219,10 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult UpdateManager(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
 
             data = new DataAccessLayer(_IConfiguration);
 
@@ -228,6 +258,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult UpdateNurse(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
 
             var gender = context.Gender.OrderBy(o => o.GenderName);
@@ -252,6 +287,7 @@ namespace NurseVolunteeringSystem.Controllers
             return View(user);
         }
 
+        [HttpPost]
         public IActionResult UpdateNurse(UpdateNurseVM nurse)
         {
             if(ModelState.IsValid)
@@ -276,6 +312,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult DeleteManager(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
 
             dt = data.GetManagerByID(id);
@@ -304,6 +345,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpGet]
         public IActionResult DeleteNurse(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
 
             dt= data.GetNurseByID(id);

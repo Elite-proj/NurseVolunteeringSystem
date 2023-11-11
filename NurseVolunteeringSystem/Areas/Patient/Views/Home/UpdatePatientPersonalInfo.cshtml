@@ -6,9 +6,9 @@
 <head>
     <script src="~/lib/jquery/dist/jquery.js"></script>
 </head>
-<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+<div class="w-100 bg-primary">
     <div class="pt-1 m-0 row">
-        <h5 class="text-dark text-center ml-5" style="text-align:center">Update Personal Details</h5>
+        <h5 class="text-white text-center ml-5" style="text-align:center">Update Personal Details</h5>
     </div>
 </div>
 <hr />
@@ -58,7 +58,7 @@
                 <input asp-for="AddressLine2" class="form-control" />
                 <span asp-validation-for="AddressLine2" class="text-danger"></span>
             </div>
-            <div class="col-6 form-group">
+            <div class="form-group">
                 <label class="control-label">City</label>
                 <select id="CityList" class="form-control" asp-items="ViewBag.Cities"></select>
 
@@ -106,7 +106,7 @@
 </div>
 
 <div>
-    <a asp-controller="Home" asp-area="Patient" asp-action="HomePage">Back</a>
+    <a asp-controller="Home" asp-area="Patient" asp-action="HomePage" class="btn btn-primary">Back</a>
 </div>
 
 <script type="text/javascript">

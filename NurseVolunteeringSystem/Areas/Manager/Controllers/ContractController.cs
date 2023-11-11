@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,11 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult ListContracts()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var contracts = context.CareContract.Where(c=>c.ContractStatus=="N").Include(s => s.Suburb).OrderBy(o => o.CareContractID);
 
             return View(contracts);
@@ -40,13 +46,20 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult ContractsByDate()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             return View();
         }
 
         [HttpPost]
         public IActionResult ContractsByDate(DateRangeVM date)
         {
-            if(ModelState.IsValid)
+            
+
+            if (ModelState.IsValid)
             {
                 data = new DataAccessLayer(_IConfiguration);
                 dt = new DataTable();
@@ -87,6 +100,11 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult ListAssignedContracts()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var contracts = context.CareContract.Where(c => c.ContractStatus == "A").Include(s => s.Suburb).OrderBy(o => o.CareContractID);
 
             return View(contracts);
@@ -95,6 +113,11 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult ContractVisits(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             ViewBag.ContractID = id;
             return View();
         }
@@ -141,6 +164,11 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult AssignNurse(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var contract = context.CareContract.Find(id);
 
             var nurses = context.PrefferedSuburb.Where(p => p.SuburbID == contract.SuburbID).Include(n => n.Nurse).ThenInclude(u => u.User);

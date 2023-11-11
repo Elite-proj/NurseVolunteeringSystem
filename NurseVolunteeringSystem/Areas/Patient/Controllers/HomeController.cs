@@ -36,6 +36,11 @@ namespace NurseVolunteeringSystem.Areas.Patient.Controllers
         [HttpGet]
         public IActionResult HomePage()
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             int id = (int)HttpContext.Session.GetInt32("PatientID");
 
             ViewBag.TotalClosedContracts = context.CareContract.Where(c => c.PatientID == id && c.ContractStatus == "C").Count();
@@ -44,12 +49,17 @@ namespace NurseVolunteeringSystem.Areas.Patient.Controllers
             ViewBag.UpcomingVisits = context.CareVisit.Include(c => c.CareContract).Where(p => p.CareContract.PatientID == id && p.CareContract.DeleteStatus == "Active" && p.Status=="Active" && p.VisitDate >= DateTime.Now).Count();
 
             var CareVisits = context.CareVisit.Include(c => c.CareContract).ThenInclude(s => s.Suburb).Where(p => p.CareContract.PatientID == id && p.CareContract.DeleteStatus == "Active" && p.Status == "Active" && p.VisitDate >= DateTime.Now).OrderBy(o => o.VisitDate);
-            return View();
+            return View(CareVisits);
         }
 
         [HttpGet]
         public IActionResult ChangePassword()
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
             dt = new DataTable();
             int id = (int)HttpContext.Session.GetInt32("PatientID");
@@ -82,6 +92,11 @@ namespace NurseVolunteeringSystem.Areas.Patient.Controllers
         [HttpGet]
         public IActionResult UpdatePatientPersonalInfo()
         {
+            if (HttpContext.Session.GetInt32("PatientID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
             int id = (int)HttpContext.Session.GetInt32("PatientID");
 

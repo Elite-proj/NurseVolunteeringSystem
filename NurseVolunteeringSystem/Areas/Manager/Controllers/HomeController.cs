@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,11 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult HomePage()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             ViewBag.TotalPatients = context.Users.Where(u => u.UserType == "P").Count();
             double totalContracts= context.CareContract.Where(c => c.DeleteStatus == "Active").Count();
             ViewBag.TotalContracts = totalContracts;
@@ -41,7 +47,7 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
             var Contracts = context.CareContract.Where(c => c.ContractDate <= Maxdate && c.ContractDate >= MinDate && c.ContractStatus == "N" && c.DeleteStatus=="Active").Include(s => s.Suburb).OrderBy(o => o.ContractDate);
 
 
-            return View();
+            return View(Contracts);
         }
 
     }

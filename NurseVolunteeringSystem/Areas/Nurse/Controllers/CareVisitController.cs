@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using NurseVolunteeringSystem.Areas.Nurse.Models;
 using NurseVolunteeringSystem.Models;
 using System;
@@ -22,6 +23,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var visit = context.CareVisit.Find(id);
 
             EditCareVisitVM care = new EditCareVisitVM();
@@ -71,6 +77,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
 
         public IActionResult Delete(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var visit = context.CareVisit.Find(id);
 
             visit.Status = "In-Active";

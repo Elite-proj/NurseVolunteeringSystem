@@ -44,19 +44,20 @@ namespace NurseVolunteeringSystem.Controllers
 
         public IActionResult AddAdmin()
         {
+
+            data = new DataAccessLayer(_IConfiguration);
+
             User user = new User();
-            user.UserID = 7;
             user.Username = "Admin";
             user.Password = "HepingHands";
-            user.UserType = "A";
-            user.Status = "Active";
-            user.GenderID = 1;
-            user.SuburbID = 12;
-            user.Password = PasswordEncryption.ConvertToEncrypt(user.Password);
+            user.Email = "helpHands@gmail.com";
+            user.ContactNo = "0682581235";
 
-            context.Users.Update(user);
 
-            context.SaveChanges();
+
+            data.RegisterAdmin(user);
+
+            
 
             return View("Index","Home");
         }

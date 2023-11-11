@@ -2,6 +2,7 @@
 using System.Linq;
 using NurseVolunteeringSystem.Models;
 using NurseVolunteeringSystem;
+using Microsoft.AspNetCore.Http;
 
 public class CityController : Controller
 {
@@ -15,6 +16,11 @@ public class CityController : Controller
     [Area("Manager")]
     public IActionResult Index()
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var cities = _context.City.Where(c => c.Status == "Active").ToList();
         return View(cities);
     }
@@ -22,6 +28,11 @@ public class CityController : Controller
     [Area("Manager")]
     public IActionResult Create()
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         return View();
     }
 
@@ -33,7 +44,7 @@ public class CityController : Controller
         {
             _context.City.Add(model);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","City", new { area="Manager"});
         }
         return View(model);
     }
@@ -42,6 +53,11 @@ public class CityController : Controller
 
     public IActionResult Edit(int id)
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var city = _context.City.Find(id);
         if (city == null)
         {
@@ -68,6 +84,11 @@ public class CityController : Controller
 
     public IActionResult Details(int id)
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var city = _context.City.Find(id);
         if (city == null)
         {
@@ -79,6 +100,11 @@ public class CityController : Controller
     [Area("Manager")]
     public IActionResult Delete(int id)
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var city = _context.City.Find(id);
         if (city == null)
         {

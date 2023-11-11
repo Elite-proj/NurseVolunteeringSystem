@@ -12,6 +12,7 @@ using PdfSharpCore.Pdf;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 
 namespace NurseVolunteeringSystem.Areas.Manager.Controllers
 {
@@ -36,6 +37,11 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult ListSuburbs()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var nurses = _context.Nurse.Include(u => u.User).Where(n=>n.User.UserType=="N" && n.User.Status=="Active").OrderBy(o => o.User.FirstName);
 
             ViewBag.Nurses = ViewBag.Nurses = new SelectList((from s in nurses
@@ -69,6 +75,11 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
         [HttpGet]
         public IActionResult DownloadSuburbsList(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             data = new DataAccessLayer(_IConfiguration);
             dt = new DataTable();
             var document = new PdfDocument();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NurseVolunteeringSystem.Models;
 using NurseVolunteeringSystem;
+using Microsoft.AspNetCore.Http;
 
 public class ChronicConditionController : Controller
 {
@@ -19,6 +20,11 @@ public class ChronicConditionController : Controller
     [Area("Manager")]
     public IActionResult Index()
     {
+        if(HttpContext.Session.GetString("Names")==null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var chronicConditions = _context.ChronicCondition.Where(c => c.Status == "Active").ToList();
         return View(chronicConditions);
     }
@@ -27,6 +33,11 @@ public class ChronicConditionController : Controller
 
     public IActionResult Create()
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         return View();
     }
 
@@ -47,6 +58,11 @@ public class ChronicConditionController : Controller
 
     public IActionResult Edit(int id)
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var condition = _context.ChronicCondition.Find(id);
         if (condition == null)
         {
@@ -72,6 +88,11 @@ public class ChronicConditionController : Controller
 
     public IActionResult Details(int id)
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var condition = _context.ChronicCondition.Find(id);
         if (condition == null)
         {
@@ -83,6 +104,11 @@ public class ChronicConditionController : Controller
     [Area("Manager")]
     public IActionResult Delete(int id)
     {
+        if (HttpContext.Session.GetString("Names") == null)
+        {
+            return RedirectToAction("Account", "Login", new { area = "" });
+        }
+
         var condition = _context.ChronicCondition.Find(id);
         if (condition == null)
         {

@@ -25,9 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.UserType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -46,9 +44,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserType)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+            
             <td>
                 <a asp-controller="ManageUsers" asp-action="UpdateManager" asp-route-id="@item.UserID">Edit</a> |
                 <a asp-controller="ManageUsers" asp-action="DeleteManager" asp-route-id="@item.UserID">Delete</a>

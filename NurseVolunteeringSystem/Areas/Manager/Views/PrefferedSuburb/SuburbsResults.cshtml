@@ -3,15 +3,15 @@
 @{
     ViewData["Title"] = "SuburbsResults";
 }
-<div class="w-100 " style="background: rgb(255, 215, 0,0.8 )">
+<div class="w-100 bg-primary">
     <div class="pt-1 m-0 row">
-        <h5 class="text-dark text-center ml-5" style="text-align:center">Suburbs List</h5>
+        <h5 class="text-white text-center ml-5" style="text-align:center">Suburbs List</h5>
     </div>
 </div>
 <hr />
 <br/>
 <p>
-    <a asp-controller="PrefferedSuburb" asp-area="Manager" asp-action="ListSuburbs">Back</a>
+    <a asp-controller="PrefferedSuburb" asp-area="Manager" asp-action="ListSuburbs" class="btn btn-primary">Back</a>
 </p>
 <div class="text-right"><a class="btn btn-primary" asp-controller="PrefferedSuburb" asp-area="Manager" asp-action="DownloadSuburbsList" asp-route-id="@ViewBag.NurseID">Download</a></div>
 <br />

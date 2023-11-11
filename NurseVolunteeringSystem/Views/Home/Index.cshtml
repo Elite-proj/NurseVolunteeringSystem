@@ -1,11 +1,150 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model NurseVolunteeringSystem.Models.Business;
+@{
+    ViewData["Title"] = "Home";
+    Layout = "_HomePageLayout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <a asp-controller="Account" asp-action="AddAdmin" asp-area="">add admin</a><br/>
-   
+<!-- ======= hero Section ======= -->
+<section id="hero">
+    <div class="hero-container">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
 
-</div>
+            <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+            <div class="carousel-inner" role="listbox">
+
+                <div class="carousel-item active" style="background-image: url(assets/img/hero-carousel/hero-bg.jpg)">
+                    <div class="carousel-container">
+                        <div class="container">
+                            <h2 class="animate__animated animate__fadeInDown">Helping hands</h2>
+                            <p class="animate__animated animate__fadeInUp">Offering free wound care around Nelson Mandela Bay area</p>
+                            <a asp-controller="Account" asp-action="Register" asp-area="" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item" style="background-image: url(assets/img/hero-carousel/nails.jpg)">
+                    <div class="carousel-container">
+                        <div class="container">
+                            <h2 class="animate__animated animate__fadeInDown">@Model.OrganizationName</h2>
+                            <p class="animate__animated animate__fadeInUp">Offering free wound care around Nelson Mandela Bay area</p>
+                            <a asp-controller="Account" asp-action="Register" asp-area="" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+            </a>
+
+        </div>
+    </div>
+</section><!-- End Hero Section -->
+
+<main id="main">
+
+    <!-- ======= About Section ======= -->
+    <div id="about" class="about-area area-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-headline text-center">
+                        <h2>About Helping hands</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- single-well start-->
+                <!-- single-well end-->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="well-middle">
+                        <div class="single-well">
+                            <a asp-action="" asp-controller="" asp-area="">
+                                <h4 class="sec-head">Helping hands</h4>
+                            </a>
+                            <p>
+                                HELPING HANDS provides wound care (e.g. leg and foot ulcers, post-operative wounds, diabetic
+                                wounds, bed sores etc.) for those in need in the Nelson Mandela Bay area.
+                            </p>
+                            <ul>
+                                <li>
+                                    <i class="bi bi-check"></i> Friendly
+                                </li>
+                                <li>
+                                    <i class="bi bi-check"></i> Caring
+                                </li>
+                                <li>
+                                    <i class="bi bi-check"></i> Healthy
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End col-->
+            </div>
+        </div>
+    </div><!-- End About Section -->
+    <!-- ======= Team Section ======= -->
+    <!-- ======= Contact Section ======= -->
+    <div id="contact" class="contact-area">
+        <div class="contact-inner area-padding">
+            <div class="contact-overly"></div>
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="section-headline text-center">
+                            <h2>Contact us</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Start contact icon column -->
+                    <div class="col-md-4">
+                        <div class="contact-icon text-center">
+                            <div class="single-icon">
+                                <i class="bi bi-phone"></i>
+                                <p>
+                                    Call: @Model.ContactNo<br>
+                                    <span>@Model.OperatingHours</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start contact icon column -->
+                    <div class="col-md-4">
+                        <div class="contact-icon text-center">
+                            <div class="single-icon">
+                                <i class="bi bi-envelope"></i>
+                                <p>
+                                    Email: @Model.Email<br>
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start contact icon column -->
+                    <div class="col-md-4">
+                        <div class="contact-icon text-center">
+                            <div class="single-icon">
+                                <i class="bi bi-geo-alt"></i>
+                                <p>
+                                    Location: @Model.AddressLine1<br/>@Model.AddressLine2<br/>
+                                    <span>@Model.Suburb.SuburbName @Model.Suburb.PostalCode, @Model.Suburb.City.CityName</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div><!-- End Contact Section -->
+
+</main>

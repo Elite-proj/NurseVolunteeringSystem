@@ -63,19 +63,12 @@ namespace NurseVolunteeringSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SuburbID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SuburbID1")
+                    b.Property<int>("SuburbID")
                         .HasColumnType("int");
 
                     b.HasKey("BusinessID");
 
-                    b.HasIndex("SuburbID1");
+                    b.HasIndex("SuburbID");
 
                     b.ToTable("Business");
                 });
@@ -435,7 +428,7 @@ namespace NurseVolunteeringSystem.Migrations
                 {
                     b.HasOne("NurseVolunteeringSystem.Models.Suburb", "Suburb")
                         .WithMany()
-                        .HasForeignKey("SuburbID1")
+                        .HasForeignKey("SuburbID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -44,7 +44,7 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
             var CareVisits = context.CareVisit.Include(c => c.CareContract).ThenInclude(s=> s.Suburb).Where(n => n.VisitDate>=DateTime.Now && n.Status == "Active" && n.CareContract.NurseID == id && n.CareContract.DeleteStatus == "Active").OrderBy(o => o.VisitDate);
 
 
-            return View();
+            return View(CareVisits);
         }
         [HttpGet]
         public IActionResult ChangePassword()
@@ -52,7 +52,7 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
             data = new DataAccessLayer(_IConfiguration);
             dt = new DataTable();
             int id = (int)HttpContext.Session.GetInt32("NurseID");
-            dt = data.GetUserByID(id);
+            dt = data.GetNurseByID(id);
 
             UpdateUserPassword password = new UpdateUserPassword();
 
@@ -97,7 +97,7 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
             user.Email = dt.Rows[0]["Email"].ToString();
             user.GenderID = int.Parse(dt.Rows[0]["GenderID"].ToString());
             user.ContactNo = dt.Rows[0]["ContactNo"].ToString();
-
+            user.IDNumber= dt.Rows[0]["IDNumber"].ToString();
             user.NurseID = int.Parse(dt.Rows[0]["UserID"].ToString());
 
             return View(user);

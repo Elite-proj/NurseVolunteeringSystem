@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NurseVolunteeringSystem.Models;
 using System.Linq;
@@ -17,6 +18,11 @@ namespace NurseVolunteeringSystem.Controllers
         [Area("Manager")]
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var suburbs = _context.Suburb
                 .Where(s => s.Status == "Active")
                 .Include(s => s.City)
@@ -29,6 +35,11 @@ namespace NurseVolunteeringSystem.Controllers
         [Area("Manager")]
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             ViewBag.Cities = _context.City.ToList();
             return View();
         }
@@ -37,6 +48,11 @@ namespace NurseVolunteeringSystem.Controllers
         [HttpPost]
         public IActionResult Create(Suburb model)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             if (ModelState.IsValid)
             {
                 
@@ -56,6 +72,11 @@ namespace NurseVolunteeringSystem.Controllers
         [Area("Manager")]
         public IActionResult Edit(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var suburb = _context.Suburb.Include(s => s.City).FirstOrDefault(s => s.SuburbID == id);
 
             if (suburb == null)
@@ -92,6 +113,11 @@ namespace NurseVolunteeringSystem.Controllers
         [Area("Manager")]
         public IActionResult Details(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var suburb = _context.Suburb.Include(s => s.City).FirstOrDefault(s => s.SuburbID == id);
             if (suburb == null)
             {
@@ -104,6 +130,11 @@ namespace NurseVolunteeringSystem.Controllers
         [Area("Manager")]
         public IActionResult Delete(int id)
         {
+            if (HttpContext.Session.GetString("Names") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var suburb = _context.Suburb.Include(s => s.City).FirstOrDefault(s => s.SuburbID == id);
             if (suburb == null)
             {

@@ -37,6 +37,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult AddPreferredSuburb()
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var Cities = context.City.OrderBy(o => o.CityName);
 
             ViewBag.Cities = new SelectList(Cities, "CityID", "CityName");
@@ -79,6 +84,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult ListPreferredSuburbs()
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             int id = int.Parse(HttpContext.Session.GetInt32("NurseID").ToString());
 
             var suburbs= context.PrefferedSuburb.Where(p => p.NurseID == id && p.Status=="Active").Include(s => s.Suburb).Include(c => c.Suburb.City);
@@ -90,6 +100,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult UpdatePreferredSuburb(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var Cities = context.City.OrderBy(o => o.CityName);
 
             ViewBag.Cities = new SelectList(Cities, "CityID", "CityName");
@@ -123,6 +138,11 @@ namespace NurseVolunteeringSystem.Areas.Nurse.Controllers
         [HttpGet]
         public IActionResult ConfirmPreferredSuburb(int id)
         {
+            if (HttpContext.Session.GetInt32("NurseID") == null)
+            {
+                return RedirectToAction("Account", "Login", new { area = "" });
+            }
+
             var suburb = context.PrefferedSuburb.Where(p => p.PrefferedSuburbID == id).Include(s => s.Suburb);
 
             return View(suburb);
