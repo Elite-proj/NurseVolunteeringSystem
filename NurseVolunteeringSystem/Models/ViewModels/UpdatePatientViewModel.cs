@@ -26,7 +26,7 @@ namespace NurseVolunteeringSystem.Models.ViewModels
         public string Email { get; set; }
         [Required(ErrorMessage = "Please confirm email")]
         [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid format")]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm Email")]
         public string ConfirmEmail { get; set; }
         
         [Required(ErrorMessage = "Please enter contacts")]

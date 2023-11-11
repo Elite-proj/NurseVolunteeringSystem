@@ -132,23 +132,25 @@ namespace NurseVolunteeringSystem.Areas.Manager.Controllers
 
                 dt = data.SearchVisitsByDates(date);
 
-                List<CareVisit> visits = new List<CareVisit>();
+                //List<CareVisit> visits = new List<CareVisit>();
 
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    CareVisit visit = new CareVisit();
+                //for (int i = 0; i < dt.Rows.Count; i++)
+                //{
+                //    CareVisit visit = new CareVisit();
 
-                    visit.ApproximateArriveTime = DateTime.Parse(dt.Rows[i]["ApproximateArriveTime"].ToString());
-                    visit.CareContractID = int.Parse(dt.Rows[i]["CareContractID"].ToString());
-                    visit.CareVisitID = int.Parse(dt.Rows[i]["CareVisitID"].ToString());
-                    visit.DepartTime = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
-                    visit.Notes = dt.Rows[i]["Notes"].ToString();
-                    visit.VisistArriveTime = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
-                    visit.VisitDate = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
-                    visit.WoundProgress = dt.Rows[i]["WoundProgress"].ToString();
+                //    visit.ApproximateArriveTime = DateTime.Parse(dt.Rows[i]["ApproximateArriveTime"].ToString());
+                //    visit.CareContractID = int.Parse(dt.Rows[i]["CareContractID"].ToString());
+                //    visit.CareVisitID = int.Parse(dt.Rows[i]["CareVisitID"].ToString());
+                //    visit.DepartTime = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
+                //    visit.Notes = dt.Rows[i]["Notes"].ToString();
+                //    visit.VisistArriveTime = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
+                //    visit.VisitDate = DateTime.Parse(dt.Rows[i]["DepartTime"].ToString());
+                //    visit.WoundProgress = dt.Rows[i]["WoundProgress"].ToString();
 
-                    visits.Add(visit);
-                }
+                //    visits.Add(visit);
+                //}
+
+                var visits = context.CareVisit.Where(c => c.CareContractID == date.contractID && c.VisitDate>=date.MinDate && c.VisitDate<=date.MaxDate && c.Status == "Active").OrderBy(o => o.CareVisitID);
 
                 return View("SearchResults", visits);
             }

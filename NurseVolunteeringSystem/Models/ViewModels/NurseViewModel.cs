@@ -35,6 +35,7 @@ namespace NurseVolunteeringSystem.Models.ViewModels
         [Required(ErrorMessage ="Please select gender")]
         public int GenderID { get; set; }
         [Required(ErrorMessage = "Please enter ID Number")]
+        [Range(1000000000000, 9999999999999, ErrorMessage = "ID Number must be 13 digits.")]
         public string IDNumber { get; set; }
 
         public string UserType { get; set; }
